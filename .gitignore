@@ -11,7 +11,7 @@
 !/.vim/indent/
 !/.vim/plugin/
 !/.vim/snippets/
-!/.vim/syntax/
+!/.vim/syntax/*
 
 !/.bashrc
 !/.bash-will
