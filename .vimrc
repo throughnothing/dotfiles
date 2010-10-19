@@ -36,6 +36,11 @@ au BufRead,BufNewFile *.tal		setfiletype html
 filetype plugin on
 filetype indent on
 filetype on
+"VALA STUFF
+autocmd BufRead *.vala set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
+autocmd BufRead *.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
+au BufRead,BufNewFile *.vala            setfiletype vala
+au BufRead,BufNewFile *.vapi            setfiletype vala
 "}}}
 " {{{ Variables
 " Standard Vim Vars
