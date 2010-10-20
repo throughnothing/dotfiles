@@ -25,7 +25,7 @@ set ignorecase
 set showcmd
 set splitbelow
 "set cindent
-"set et
+set et
 "}}}
 "{{{ autocmd/filetypes
 "Auto source vimrc
@@ -75,8 +75,8 @@ nmap <C-w>t <C-w>]<C-w>T
 nmap <Leader>ad A - <Esc>:r!date<CR>kJ
 
 "for showing tabs,etc
-map <Leader>ls :setlocal list listchars=tab:Â»-,trail:Â·,extends:>,precedes:<<CR>
-map <Leader>lh :setlocal nolist<CR>
+set lcs=tab:▹\ ,eol:¬,trail:·,extends:«,precedes:»
+map <Leader>lt :setlocal list!<CR>
 
 "C-c to escape
 inoremap <C-c> <Esc><Esc>
