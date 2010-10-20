@@ -90,7 +90,7 @@ function JekyllPost(title)
     let file_name = strftime("%Y-%m-%d-") . s:esctitle(title) . "." . g:jekyll_post_suffix
     echo "Making that post " . file_name
     exe "e " . g:jekyll_path . "/_posts/" . file_name
-    let err = append(0, ['---', 'layout: post', 'title: "' . title . '"', 'published: true', '---', ''])
+    let err = append(0, ['---', 'layout: post', 'title: "' . title . '"', 'published: false', '---', ''])
   else
     call s:error("You must specify a title")
   endif
