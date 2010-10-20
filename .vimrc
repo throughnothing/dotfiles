@@ -224,5 +224,11 @@ fu! Run(command, winSize)
     exe "normal \<C-W>W"
 endf
 "}}}
+"{{{ Jekyll.vim stuff
+let g:jekyll_path = "/home/throughnothing/projects/throughnothing.com/blog"
+let g:jekyll_post_suffix = "textile"
+map <Leader>jn  :JekyllPost<CR>
+map <Leader>jl  :JekyllList<CR>
+"}}}
 
 " vim:fdm=marker:

@@ -1,6 +1,6 @@
 *
 *.swp
-
+*.netrwhist
 !/.vim/after/
 !/.vim/autoload/
 !/.vim/colors/
