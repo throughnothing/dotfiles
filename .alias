@@ -18,6 +18,8 @@ alias t='~/.scripts/t'
 alias vigo='vim ~/.go'
 alias vimw='vim -c :VimwikiGoHome'
 
+alias lssh='ps aux | grep ssh'
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -34,3 +36,4 @@ alias gp='git pull'
 alias gpo='git push origin'
 
 alias ack='ack-grep'
+alias gca='gclcli agenda'
