@@ -35,4 +35,5 @@ alias gc='git commit'
 alias gp='git pull'
 alias gpo='git push origin'
 
+alias ack='ack-grep'
 alias gca='gclcli agenda'
