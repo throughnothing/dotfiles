@@ -3,35 +3,34 @@
 "colorscheme default
 "colorscheme wombat
 colorscheme vibrantink
+" none of that!
+set guioptions=
 syntax on
 set modeline
 set hls
 set ls=2
 set autoindent
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set bs=2
 set ruler
-"set foldmethod=marker
-set foldmethod=indent
-set foldlevel=0
-set foldnestmax=20
 set tags=tags;
 set pastetoggle=<C-i>
 set shm=aI
-set ignorecase
-"set clipboard=unnamed
-set showcmd
+set noignorecase
+set clipboard=unnamed
 set splitbelow
-"set cindent
 set et
+" make sure mouse clicks dont move cursor
+set mouse -=a
 "}}}
 "{{{ autocmd/filetypes
 "Auto source vimrc
 autocmd! bufwritepost .vimrc source %
 autocmd FileType xml set foldmethod=syntax
 autocmd FileType xml set foldlevel=100
+autocmd FileType mail execute "normal }O\<Esc>o"
 au BufRead,BufNewFile *.tal		setfiletype html
 filetype plugin on
 filetype indent on
@@ -52,13 +51,15 @@ let g:GPGUseAgent = 0
 let g:xml_syntax_folding=1
 " VimWiki
 let g:vimwiki_list = [{"path":"~/.wiki/work","path_html":"~/.wiki/work/html" }]
-" For project plugin
-let g:proj_flags="cgst"
 "}}}
 "{{{ Maps
+nmap <Leader>lcd :cd %:p:h<CR>
 nmap [[ [{
 nmap ]] ]}
 nmap <Leader>P :Project<CR>
+" Git Stuff
+nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>gd :Gdiff<CR>
 " Clear entire buffer
 nmap <Leader>cb ggVGd
 "Make the current word a wikiword
@@ -82,9 +83,9 @@ map <Leader>lt :setlocal list!<CR>
 inoremap <C-c> <Esc><Esc>
 
 "Edit vimrc file
-nmap ,v :tabe ~/.vimrc<CR>
+nmap <Leader>v :tabe ~/.vimrc<CR>
+nmap <Leader>s :so ~/.vimrc<CR>
 nmap <C-j> i<CR><Esc>
-"nmap te :tabe 
 
 "Grep recursively in all files for the current word
 nmap <Leader>g yiw :exe 'grep! -ir -I ' @0 '*'<CR>
@@ -100,87 +101,24 @@ nmap <C-c>c O<Esc>Vj/{<Enter>%jzfzojwveykhhpa class<Esc>zco<Esc>
 nmap Q q
 
 "Change tabs
-imap <C-l> <Esc>gt
-imap <C-h> <Esc>gT
 nmap <C-l> gt
 nmap <C-h> gT
 
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>?<CR>
 "}}}
 "{{{ Misc Functions
 " * and # search for next/previous of selected text when used in visual mode
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>?<CR>
 function! s:VSetSearch()
   let old = @"
   norm! gvy
   let @/ = '\V' . substitute(escape(@", '\'), '\n', '\\n', 'g')
   let @" = old
 endfunction
-
-map <Leader>f :call BrowserOpen()<CR>
-function! BrowserOpen ()
-  let l:line = getline (".")
-  let l:url = ""
-perl << EOF
-  my $line = VIM::Eval('l:line');
-  $line =~ m/((https?:\/\/|www\.)[^\s",;\t'>]*)\b/;
-  VIM::DoCommand("let l:url = '$1'");
-EOF
-  echo "Opening " . l:url
-  silent exec "!elinks ".l:url
-  redraw!
-endfunction
-nmap <Leader>cu :call CopyURL()<CR>
-function! CopyURL ()
-  let l:line = getline (".")
-  let @* = matchstr (l:line, "http://[^ \",;\t'>]*")
-endfunction
 "}}}
 "{{{ Run Functions
-cabbrev antt call AntTest()
-cabbrev anti call AntIntTest()
-cabbrev antm call AntMake()
-cabbrev phpl call PhpSyntaxCheck()
-cabbrev phpr call PhpRun()
 cabbrev pyr call PythonRun()
 cabbrev br call BashRun()
-cabbrev perlx call PerlRun()
-cabbrev perlt call PerlTest()
-
-fu! AntMake()
-	let l:mp = &mp
-	let l:efm = &efm
-
-	set efm&vim
-	set mp=ant\ unittest\ \\\|&\ perl\ anterror.pl
-	silent make!
-	redraw!
-	exe "set mp= " . l:mp
-	exe "set efm= " . l:efm
-	cope
-endf
-
-fu! AntTest()
-    on
-    call Run("ant test", 20)
-endf
-
-fu! AntIntTest()
-    on
-    call Run("ant inttest", 20)
-endf
-
-fu! PhpSyntaxCheck()
-    on
-    let l:file = @%
-    call Run("php -l " . l:file, 3)
-endf
-
-fu! PhpRun()
-    on
-    let l:file = @%
-    call Run("php " . l:file, 10)
-endf
 
 fu! PythonRun()
     on
@@ -223,12 +161,6 @@ fu! Run(command, winSize)
     exe "normal G"
     exe "normal \<C-W>W"
 endf
-"}}}
-"{{{ Jekyll.vim stuff
-let g:jekyll_path = "/home/throughnothing/projects/throughnothing.com/blog"
-let g:jekyll_post_suffix = "textile"
-map <Leader>jn  :JekyllPost<CR>
-map <Leader>jl  :JekyllList<CR>
 "}}}
 
 " vim:fdm=marker:
