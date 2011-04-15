@@ -31,9 +31,13 @@ alias .........='cd ../../../../../../../..'
 
 #Git
 alias gs='git status'
+alias gd='git diff --color'
+alias gdp='git diff --color -p'
+alias gl='git log --color'
+alias glp='git log --color -p'
 alias gc='git commit'
 alias gp='git pull'
 alias gpo='git push origin'
 
-alias ack='ack-grep'
 alias gca='gclcli agenda'
+alias pyserve='python -m SimpleHTTPServer'
