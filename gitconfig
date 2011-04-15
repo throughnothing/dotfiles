@@ -1,10 +1,7 @@
 [user]
 	name = William Wolf
-	email = throughnothing@gmail.com
+	email = wwolf@siteworx.com
 [color]
-	branch = auto
-	status = auto
-	diff = auto
 	ui = auto
 [advice]
-	statushints = false
+	statusHints = false
