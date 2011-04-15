@@ -3,7 +3,13 @@
 "colorscheme default
 "colorscheme wombat
 colorscheme vibrantink
+"colorscheme vividchalk
 " none of that!
+
+if has("gui_running")
+    colorscheme wombat
+endif
+
 set guioptions=
 syntax on
 set modeline
@@ -15,14 +21,19 @@ set shiftwidth=4
 set softtabstop=4
 set bs=2
 set ruler
+set foldmethod=marker
+"set foldmethod=indent
+set foldlevel=0
+set foldnestmax=20
 set tags=tags;
 set pastetoggle=<C-i>
 set shm=aI
 set noignorecase
 set clipboard=unnamed
+set showcmd
 set splitbelow
+"set cindent
 set et
-" make sure mouse clicks dont move cursor
 set mouse -=a
 "}}}
 "{{{ autocmd/filetypes
@@ -40,6 +51,9 @@ autocmd BufRead *.vala set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
 autocmd BufRead *.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
 au BufRead,BufNewFile *.vala            setfiletype vala
 au BufRead,BufNewFile *.vapi            setfiletype vala
+
+autocmd BufRead *.mako set ft=html
+au BufRead,BufNewFile *.mako            setfiletype html
 "}}}
 " {{{ Variables
 " Standard Vim Vars
@@ -51,17 +65,27 @@ let g:GPGUseAgent = 0
 let g:xml_syntax_folding=1
 " VimWiki
 let g:vimwiki_list = [{"path":"~/.wiki/work","path_html":"~/.wiki/work/html" }]
+" For project plugin
+let g:proj_flags="cgst"
 "}}}
 "{{{ Maps
-nmap <Leader>lcd :cd %:p:h<CR>
+" write all files and save session
+nmap <Leader>SS :wa<CR><Leader>ss
+nmap <Leader>lcd :cd %:p:h<CR><Leader>sl<CR>
 nmap [[ [{
 nmap ]] ]}
 nmap <Leader>P :Project<CR>
+nmap <Leader>ct :CommandT<CR>
+nmap <Leader>nt :NERDTreeToggle<CR>
 " Git Stuff
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gd :Gdiff<CR>
+nmap <Leader>gl :Glog<CR>
+nmap <Leader>gc :Gcommit<CR>
 " Clear entire buffer
-nmap <Leader>cb ggVGd
+nmap <Leader>db ggVGd
+
+"" Wiki Stuff
 "Make the current word a wikiword
 nmap <Leader>mw bi[[<Esc>wea]]<Esc>
 " Open current wikiword in new split
@@ -101,24 +125,46 @@ nmap <C-c>c O<Esc>Vj/{<Enter>%jzfzojwveykhhpa class<Esc>zco<Esc>
 nmap Q q
 
 "Change tabs
+imap <C-l> <Esc>gt
+imap <C-h> <Esc>gT
 nmap <C-l> gt
 nmap <C-h> gT
 
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>?<CR>
 "}}}
 "{{{ Misc Functions
 " * and # search for next/previous of selected text when used in visual mode
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>?<CR>
 function! s:VSetSearch()
   let old = @"
   norm! gvy
   let @/ = '\V' . substitute(escape(@", '\'), '\n', '\\n', 'g')
   let @" = old
 endfunction
+
+map <Leader>f :call BrowserOpen()<CR>
+function! BrowserOpen ()
+  let l:line = getline (".")
+  let l:url = ""
+perl << EOF
+  my $line = VIM::Eval('l:line');
+  $line =~ m/((https?:\/\/|www\.)[^\s",;\t'>]*)\b/;
+  VIM::DoCommand("let l:url = '$1'");
+EOF
+  echo "Opening " . l:url
+  silent exec "!firefox ".l:url
+  redraw!
+endfunction
+nmap <Leader>cu :call CopyURL()<CR>
+function! CopyURL ()
+  let l:line = getline (".")
+  let @* = matchstr (l:line, "http://[^ \",;\t'>]*")
+endfunction
 "}}}
 "{{{ Run Functions
-cabbrev pyr call PythonRun()
+cabbrev pyx call PythonRun()
 cabbrev br call BashRun()
+cabbrev perlx call PerlRun()
 
 fu! PythonRun()
     on
@@ -161,12 +207,6 @@ fu! Run(command, winSize)
     exe "normal G"
     exe "normal \<C-W>W"
 endf
-"}}}
-"{{{ Jekyll.vim stuff
-let g:jekyll_path = "/home/throughnothing/projects/throughnothing.com/blog"
-let g:jekyll_post_suffix = "textile"
-map <Leader>jn  :JekyllPost<CR>
-map <Leader>jl  :JekyllList<CR>
 "}}}
 
 " vim:fdm=marker:
