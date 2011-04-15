@@ -45,30 +45,12 @@ go() {
     done
 }
 
-hdc() {
-	pushd ~ >> /dev/null
+# Dotfiles commit
+dfc() {
+	pushd ~/.dotfiles >> /dev/null
 	git add .
 	git add -u .
 	git commit -m "automated update"
-	popd >> /dev/null
-}
-
-hdp() {
-	pushd ~ >> /dev/null
-	git push slice master
-	popd >> /dev/null
-}
-
-hdac() {
-	pushd ~ >> /dev/null
-	git add .
-	git add -u .
-	popd >> /dev/null
-}
-
-hdlc() {
-	pushd ~ >> /dev/null
-	git status
 	popd >> /dev/null
 }
 
