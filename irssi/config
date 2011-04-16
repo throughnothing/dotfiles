@@ -19,6 +19,7 @@ chatnets = {
 channels = (
   { name = "#vim"; chatnet = "fnode"; autojoin = "yes"; },
   { name = "#openstack"; chatnet = "fnode"; autojoin = "yes"; },
+  { name = "#rackjam"; chatnet = "fnode"; autojoin = "yes"; },
   { name = "#node.js"; chatnet = "fnode"; autojoin = "yes"; },
   { name = "#git"; chatnet = "fnode"; autojoin = "yes"; }
 
