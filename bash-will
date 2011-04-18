@@ -2,10 +2,11 @@
 . ~/.alias
 set -o vi
 
+export ANT_HOME=/usr/local/ant
+export PATH="/usr/local/bin:$PATH:~/.scripts/:/var/lib/gems/1.8/bin/:~/.scripts/"
 export EDITOR="vim"
 export SVN_EDITOR="vim"
-export JAVA_HOME="/usr/lib/jvm/java-6-sun/"
-export PATH="$PATH:/home/wwolf/.scripts/:/var/lib/gems/1.8/bin/"
+export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
 
 function parse_git_branch {
 	ref=$(git symbolic-ref HEAD 2> /dev/null) || return
@@ -35,21 +36,39 @@ go() {
 			pushd $HOME/`echo $f | grep "^$1" | head -n 1` >> /dev/null
 		fi
     done
-    for f in $(ls $HOME/Projects | sort); do
+    for f in $(ls $HOME/projects | sort); do
         echo $f | grep -q "^$1"
         if [ $? -eq 0 ]; then
-            pushd "$HOME/Projects/$f" >> /dev/null
+            pushd "$HOME/projects/$f" >> /dev/null
             return
         fi
     done
 }
 
-# Dotfiles commit
-dfc() {
-	pushd ~/.dotfiles >> /dev/null
+hdc() {
+	pushd ~ >> /dev/null
 	git add .
 	git add -u .
 	git commit -m "automated update"
+	popd >> /dev/null
+}
+
+hdp() {
+	pushd ~ >> /dev/null
+	git push slice master
+	popd >> /dev/null
+}
+
+hdac() {
+	pushd ~ >> /dev/null
+	git add .
+	git add -u .
+	popd >> /dev/null
+}
+
+hdlc() {
+	pushd ~ >> /dev/null
+	git status
 	popd >> /dev/null
 }
 
