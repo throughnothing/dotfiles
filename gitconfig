@@ -8,3 +8,5 @@
 	ui = auto
 [advice]
 	statushints = false
+[github]
+	user = throughnothing
