@@ -8,6 +8,11 @@ export EDITOR="vim"
 export SVN_EDITOR="vim"
 export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
 
+# Vi moed binding, remap C-c to C-x and make C-c exit insert mode
+# http://stackoverflow.com/questions/3126453/bash-vi-mode-bind-c-c-to-escape-from-insert-mode
+stty intr ^X
+bind -m vi-insert C-c:vi-movement-mode
+
 function parse_git_branch {
 	ref=$(git symbolic-ref HEAD 2> /dev/null) || return
 	echo "("${ref#refs/heads/}")" 
@@ -36,10 +41,10 @@ go() {
 			pushd $HOME/`echo $f | grep "^$1" | head -n 1` >> /dev/null
 		fi
     done
-    for f in $(ls $HOME/projects | sort); do
+    for f in $(ls $HOME/Projects | sort); do
         echo $f | grep -q "^$1"
         if [ $? -eq 0 ]; then
-            pushd "$HOME/projects/$f" >> /dev/null
+            pushd "$HOME/Projects/$f" >> /dev/null
             return
         fi
     done

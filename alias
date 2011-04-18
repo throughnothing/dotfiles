@@ -30,7 +30,7 @@ alias ........='cd ../../../../../../..'
 alias .........='cd ../../../../../../../..'
 
 #Git
-alias gs='git status'
+alias gst='git status'
 alias gd='git diff --color'
 alias gdp='git diff --color -p'
 alias gl='git log --color'
