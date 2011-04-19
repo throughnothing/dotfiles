@@ -72,6 +72,7 @@ let g:proj_flags="cgst"
 "{{{ Maps
 " write all files and save session
 nnoremap <Leader>gu :GundoToggle<CR>
+nmap <Leader>sb :set scb!<CR>
 nmap <Leader>SS :wa<CR><Leader>ss
 nmap <Leader>lcd :cd %:p:h<CR><Leader>sl<CR>
 nmap [[ [{
