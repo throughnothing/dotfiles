@@ -5,3 +5,5 @@
 	ui = auto
 [advice]
 	statusHints = false
+[core]
+	excludesfile = /Users/wwolf/.gitignore_global

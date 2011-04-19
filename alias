@@ -38,6 +38,9 @@ alias glp='git log --color -p'
 alias gc='git commit'
 alias gp='git pull'
 alias gpo='git push origin'
+alias gx='open -a Gitx'
 
 alias gca='gclcli agenda'
 alias pyserve='python -m SimpleHTTPServer'
+
+
