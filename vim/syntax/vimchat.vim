@@ -1,1 +1,0 @@
-/home/will/Personal/vimchat/trunk/syntax/vimchat.vim
