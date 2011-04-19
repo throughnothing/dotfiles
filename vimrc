@@ -37,7 +37,7 @@ set et
 set mouse -=a
 "}}}
 "{{{ autocmd/filetypes
-"Auto source vimrc
+"Au to source vimrc
 autocmd! bufwritepost .vimrc source %
 autocmd FileType xml set foldmethod=syntax
 autocmd FileType xml set foldlevel=100
@@ -54,6 +54,7 @@ au BufRead,BufNewFile *.vapi            setfiletype vala
 
 autocmd BufRead *.mako set ft=html
 au BufRead,BufNewFile *.mako            setfiletype html
+call pathogen#runtime_append_all_bundles() 
 "}}}
 " {{{ Variables
 " Standard Vim Vars
@@ -70,6 +71,7 @@ let g:proj_flags="cgst"
 "}}}
 "{{{ Maps
 " write all files and save session
+nnoremap <Leader>gu :GundoToggle<CR>
 nmap <Leader>SS :wa<CR><Leader>ss
 nmap <Leader>lcd :cd %:p:h<CR><Leader>sl<CR>
 nmap [[ [{
