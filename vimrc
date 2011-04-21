@@ -212,4 +212,9 @@ fu! Run(command, winSize)
 endf
 "}}}
 
+
+" TwitVim
+let twitvim_browser_cmd="firefox"
+nmap <Leader>tf :FriendsTwitter<CR>
+
 " vim:fdm=marker:
