@@ -4,6 +4,12 @@ servers = (
     chatnet = "fnode";
     port = "6667";
     autoconnect = "yes";
+  },
+  {
+    address = "irc.gnome.org";
+    chatnet = "gnome";
+    port = "6667";
+    autoconnect = "yes";
   }
 );
 
@@ -14,16 +20,18 @@ chatnets = {
     max_whois = "4";
     max_query_chans = "5";
   };
+  gnome = { type = "IRC"; };
 };
 
 channels = (
   { name = "#node.js"; chatnet = "fnode"; autojoin = "yes"; },
   { name = "#openstack"; chatnet = "fnode"; autojoin = "yes"; },
   { name = "#rackjam"; chatnet = "fnode"; autojoin = "yes"; },
-  { name = "#ayatana"; chatnet = "fnode"; autojoin = "yes"; },
   { name = "#perl"; chatnet = "fnode"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "fnode"; autojoin = "yes"; },
-  { name = "#git"; chatnet = "fnode"; autojoin = "yes"; }
+  { name = "#gnome"; chatnet = "gnome"; autojoin = "yes"; },
+  { name = "#gtk+"; chatnet = "gnome"; autojoin = "yes"; },
+  { name = "#vala"; chatnet = "gnome"; autojoin = "yes"; },
 
   "aliases",
   {
@@ -198,7 +206,7 @@ channels = (
   { key = "^C"; id = "command"; data = "window close"; }
 );
 settings = {
-  core = { 
+  core = {
     real_name = "throughnothing";
     user_name = "throughnothing";
     nick = "throughnothing";
