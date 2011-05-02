@@ -27,11 +27,6 @@ channels = (
   { name = "#node.js"; chatnet = "fnode"; autojoin = "yes"; },
   { name = "#openstack"; chatnet = "fnode"; autojoin = "yes"; },
   { name = "#rackjam"; chatnet = "fnode"; autojoin = "yes"; },
-  { name = "#perl"; chatnet = "fnode"; autojoin = "yes"; },
-  { name = "#vim"; chatnet = "fnode"; autojoin = "yes"; },
-  { name = "#gnome"; chatnet = "gnome"; autojoin = "yes"; },
-  { name = "#gtk+"; chatnet = "gnome"; autojoin = "yes"; },
-  { name = "#vala"; chatnet = "gnome"; autojoin = "yes"; },
 
   "aliases",
   {
