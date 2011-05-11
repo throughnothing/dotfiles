@@ -2,8 +2,8 @@
 "colorscheme ir_black
 "colorscheme default
 "colorscheme wombat
-colorscheme vibrantink
-"colorscheme vividchalk
+"colorscheme vibrantink
+colorscheme vividchalk
 " none of that!
 
 if has("gui_running")
@@ -21,8 +21,8 @@ set shiftwidth=4
 set softtabstop=4
 set bs=2
 set ruler
-set foldmethod=marker
-"set foldmethod=indent
+"set foldmethod=marker
+set foldmethod=indent
 set foldlevel=0
 set foldnestmax=20
 set tags=tags;
