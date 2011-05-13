@@ -44,3 +44,6 @@ alias gca='gclcli agenda'
 alias pyserve='python -m SimpleHTTPServer'
 
 alias tmux='TERM=xterm-256color tmux'
+
+#BZR
+alias bzrd='bzr diff | vim -'
