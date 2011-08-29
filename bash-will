@@ -18,6 +18,7 @@ function parse_git_branch {
 	ref=$(git symbolic-ref HEAD 2> /dev/null) || return
 	echo "("${ref#refs/heads/}")" 
 }
+
 function num_git_commits_ahead {
 	num=$(git status 2> /dev/null | grep "Your branch is ahead of" | awk '{split($0,a," "); print a[9];}' 2> /dev/null) || return
 	if [[ "$num" != "" ]]; then
@@ -59,10 +60,8 @@ dfc() {
 	popd >> /dev/null
 }
 
-# Git bash completion
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
-fi
+## Git bash completion
+#. `brew --prefix`/etc/bash_completion
 
 #Bash Prompt
 PS1="\[\e[0;32m\][\u@\w]\[\e[m\]\n\[\e[1;34m\][\h]\[\e[m\]\[\e[0;33m\]\$(parse_git_branch)\$(num_git_commits_ahead)\[\e[m\] : "
