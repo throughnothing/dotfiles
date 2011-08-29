@@ -217,4 +217,6 @@ endf
 let twitvim_browser_cmd="firefox"
 nmap <Leader>tf :FriendsTwitter<CR>
 
+let g:vimchat_statusicon=0
+
 " vim:fdm=marker:

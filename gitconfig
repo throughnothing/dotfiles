@@ -1,9 +1,9 @@
 [user]
 	name = William Wolf
-	email = wwolf@siteworx.com
+	email = throughnothing@gmail.com
 [color]
 	ui = auto
 [advice]
-	statusHints = false
+    statusHints = false
 [core]
 	excludesfile = /Users/wwolf/.gitignore_global
