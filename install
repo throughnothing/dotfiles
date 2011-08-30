@@ -1,15 +1,14 @@
 #!/usr/bin/env perl
 use strict;
-use v5.10;
 use Cwd;
 
 my $home = glob '~';
 foreach my $file_path (glob cwd().'/*'){
     (my $file = $file_path) =~ s/^.*\/([^\/]+$)/$1/;
-    if(!($file =~ /^README|install*/)){
+    if(!($file =~ /README|install*/)){
         my $to = "$home/.$file";
         if(-e $to){
-            print "! Target ($to) exists...";
+            print "! ($to) exists...";
             if(-l $to){
                 unlink($to);
                 print "as a symlink, removed\n";
