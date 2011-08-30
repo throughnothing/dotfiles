@@ -9,3 +9,4 @@
 	excludesfile = /Users/wwolf/.gitignore_global
 [alias]
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    rbm = rebase -i master
