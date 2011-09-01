@@ -42,7 +42,8 @@ autocmd! bufwritepost .vimrc source %
 autocmd FileType xml set foldmethod=syntax
 autocmd FileType xml set foldlevel=100
 autocmd FileType mail execute "normal }O\<Esc>o"
-au BufRead,BufNewFile *.tal		setfiletype html
+au BufRead,BufNewFile *.tal setfiletype html
+au BufRead,BufNewFile *.tt setfiletype html
 filetype plugin on
 filetype indent on
 filetype on
