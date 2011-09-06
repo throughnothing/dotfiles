@@ -6,6 +6,7 @@ alias fchh='fc -20 0'
 alias fchhh='fc -30 0'
 alias grep='grep --color=auto'
 alias ll='ls -l'
+alias lla='ls -la'
 alias ls='ls'
 alias dateymd='date +%Y-%m-%d'
 alias ctagsr='ctags -R'
@@ -31,13 +32,15 @@ alias .........='cd ../../../../../../../..'
 
 #Git
 alias gs='git status'
-alias gd='git diff --color'
-alias gdp='git diff --color -p'
-alias gl='git log --color'
-alias glp='git log --color -p'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gdp='git diff -p'
+alias gl='git log --oneline'
+alias glp='git log --oneline -p'
 alias gc='git commit'
 alias gp='git pull'
 alias gpo='git push origin'
+alias gfa='git fetch --all'
 alias gx='open -a Gitx'
 
 alias gca='gclcli agenda'
@@ -47,3 +50,8 @@ alias tmux='TERM=xterm-256color tmux'
 
 #BZR
 alias bzrd='bzr diff | vim -'
+
+#OVPC clear ssh keys
+alias vpc_clear_ssh='cat ~/.ssh/known_hosts | grep -v 172.19 > ~/.ssh/known_hosts'
+alias vpc_get_novarc='scp root@172.19.0.3:/home/stacker/novarc .'
+
