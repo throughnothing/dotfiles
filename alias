@@ -32,6 +32,7 @@ alias ........='cd ../../../../../../..'
 alias .........='cd ../../../../../../../..'
 
 #Git
+alias gcu="sed -i -e 's/https:\/\/github\.com\/throughnothing/git@github\.com:throughnothing/' .git/config"
 alias gs='git status'
 alias gd='git diff'
 alias gds='git diff --staged'
