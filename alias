@@ -7,7 +7,7 @@ alias fchhh='fc -30 0'
 alias grep='grep --color=auto'
 alias ll='ls -l'
 alias lla='ls -la'
-alias ls='ls --color=auto'
+alias ls='ls -G'
 alias dateymd='date +%Y-%m-%d'
 alias ctagsr='ctags -R'
 
@@ -43,6 +43,10 @@ alias gp='git pull'
 alias gpo='git push origin'
 alias gfa='git fetch --all'
 alias gx='open -a Gitx'
+alias gdsmv="git diff | mvim -"
+alias gdsv="git diff | vim -"
+alias gdmv="git diff | mvim -"
+alias gdv="git diff | vim -"
 
 alias gca='gclcli agenda'
 alias pyserve='python -m SimpleHTTPServer'
