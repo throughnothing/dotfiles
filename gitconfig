@@ -8,6 +8,9 @@
 [core]
 	excludesfile = /home/throughnothing/.gitignore_global
 [alias]
+    mnc = merge --no-commit
+    co = checkout
+    com = commit -m
     bd = branch -D
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     rbm = rebase -i master
