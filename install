@@ -21,6 +21,8 @@ foreach my $file_path (glob cwd().'/*'){
     }
 }
 
+# Setup ~/.go if it doesn't exist
+system "touch ~/.go";
 # git push on commit
 system "echo 'git push' > .git/hooks/post-commit";
 system "chmod 755 .git/hooks/post-commit";

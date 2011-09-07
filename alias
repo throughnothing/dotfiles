@@ -35,8 +35,6 @@ alias .........='cd ../../../../../../../..'
 alias gcu="sed -i -e 's/https:\/\/github\.com\/throughnothing/git@github\.com:throughnothing/' .git/config"
 alias gs='git status'
 alias gd='git diff'
-alias gdmv='git diff | mvim -'
-alias gdv='git diff | vim -'
 alias gds='git diff --staged'
 alias gdp='git diff -p'
 alias gl='git log --oneline'
@@ -46,6 +44,9 @@ alias gp='git pull'
 alias gpo='git push origin'
 alias gfa='git fetch --all'
 alias gx='open -a Gitx'
+
+alias gdmv="git diff | mvim -"
+alias gdv="git diff | vim -"
 
 alias gca='gclcli agenda'
 alias pyserve='python -m SimpleHTTPServer'
