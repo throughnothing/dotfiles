@@ -56,7 +56,6 @@ export PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/.scripts/:/var/lib/gems/1.8/
 export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
 export SVN_EDITOR="vim"
 export JAVA_HOME="/usr/lib/jvm/java-6-sun/"
-export PATH="$PATH:/home/wwolf/.scripts/:/var/lib/gems/1.8/bin/"
 
 # Vi moed binding, remap C-c to C-x and make C-c exit insert mode
 # http://stackoverflow.com/questions/3126453/bash-vi-mode-bind-c-c-to-escape-from-insert-mode
