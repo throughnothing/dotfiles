@@ -6,7 +6,9 @@
 [advice]
     statusHints = false
 [core]
-	excludesfile = /Users/wwolf/.gitignore_global
+	excludesfile = /home/throughnothing/.gitignore_global
 [alias]
+    bd = branch -D
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     rbm = rebase -i master
+    review = !sh `git rev-parse --show-toplevel`/tools/rfc.sh
