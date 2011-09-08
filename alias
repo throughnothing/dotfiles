@@ -57,6 +57,6 @@ alias tmux='TERM=xterm-256color tmux'
 alias bzrd='bzr diff | vim -'
 
 #OVPC clear ssh keys
-alias vpc_clear_ssh='cat ~/.ssh/known_hosts | grep -v 172.19 > ~/.ssh/known_hosts'
+alias vpc_clear_ssh="sed -i -e '/^172\.19\.0.*$/d' ~/.ssh/known_hosts"
 alias vpc_get_novarc='scp root@172.19.0.3:/home/stacker/novarc .'
 
