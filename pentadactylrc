@@ -1,0 +1,11 @@
+"hg6418
+
+loadplugins '\.(js|penta)$'
+group user
+map -count -modes=n <C-l> <count><count>gt
+map -count -modes=n <C-h> <count><count>gT
+set defsearch=duckduckgo-ssl
+set guioptions=bCrTm
+set newtab=all
+
+" vim: set ft=pentadactyl:
