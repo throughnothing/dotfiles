@@ -71,6 +71,8 @@ let g:vimwiki_list = [{"path":"~/.wiki/work","path_html":"~/.wiki/work/html" }]
 let g:proj_flags="cgst"
 "}}}
 "{{{ Maps
+"Tagbar
+nmap <Leader>tb :TagbarToggle<CR>
 " write all files and save session
 nnoremap <Leader>gu :GundoToggle<CR>
 nmap <Leader>sb :set scb!<CR>
