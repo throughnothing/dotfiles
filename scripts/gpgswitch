@@ -1,0 +1,2 @@
+#!/bin/bash
+cp ~/.gnupg/gpg.conf.$1 ~/.gnupg/gpg.conf
