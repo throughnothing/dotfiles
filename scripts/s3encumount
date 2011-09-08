@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# CONFIG =======================================================================
+DM_CRYPT_NAME='s3backer'
+LOOPBACK='/dev/loop2'
+
+
+
+# Don't Edit Below Here ========================================================
+
+S3_MOUNT_POINT='/tmp/s3backer'
+ENC_MOUNT_POINT='/media/s3b'
+
+# Unmounting
+sudo umount $ENC_MOUNT_POINT
+sudo cryptsetup luksClose $DM_CRYPT_NAME
+sudo losetup -d $LOOPBACK
+sudo umount $S3_MOUNT_POINT
