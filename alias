@@ -19,6 +19,7 @@ alias t='~/.scripts/t'
 alias vigo='vim ~/.go'
 alias vimw='vim -c :VimwikiGoHome'
 
+alias psag="ps aux | grep"
 alias lssh='ps aux | grep ssh'
 
 alias ..='cd ..'
@@ -60,3 +61,5 @@ alias bzrd='bzr diff | vim -'
 alias vpc_clear_ssh="sed -i -e '/^172\.19\.0.*$/d' ~/.ssh/known_hosts"
 alias vpc_get_novarc='scp root@172.19.0.3:/home/stacker/novarc .'
 
+# OSX Postgres
+alias psql='/Library/PostgreSQL/9.0/bin/psql'
