@@ -88,6 +88,7 @@ nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gd :Gdiff<CR>
 nmap <Leader>gl :Glog<CR>
 nmap <Leader>gc :Gcommit<CR>
+map <Leader>gh :Gbrowse<CR>
 " Clear entire buffer
 nmap <Leader>db ggVGd
 
