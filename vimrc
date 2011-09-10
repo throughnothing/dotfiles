@@ -71,6 +71,9 @@ let g:vimwiki_list = [{"path":"~/.wiki/work","path_html":"~/.wiki/work/html" }]
 let g:proj_flags="cgst"
 "}}}
 "{{{ Maps
+" TwitVim
+let twitvim_browser_cmd="open"
+nmap <Leader>tf :FriendsTwitter<CR>
 "Tagbar
 nmap <Leader>tb :TagbarToggle<CR>
 " write all files and save session
@@ -172,55 +175,47 @@ endfunction
 cabbrev pyx call PythonRun()
 cabbrev br call BashRun()
 cabbrev perlx call PerlRun()
+cabbrev px call PerlRun()
+nmap <Leader>pr :px<CR>
+
+fu! NewThrowawayBuffer()
+    new
+	setlocal noswapfile
+	setlocal buftype=nowrite
+	setlocal bufhidden=delete
+	map <buffer> q :quit<CR>
+endf
 
 fu! PythonRun()
-    on
-    let l:file = @%
-    call Run("python " . l:file, 10)
+    call Run("python", 15)
 endf
 
 fu! BashRun()
     on
     let l:file = @%
-    call Run("bash " . l:file, 10)
+    call Run("bash " . l:file, 15)
 endf
 
 fu! PerlRun()
-    on
-    let l:file = @%
-    call Run("perl " . l:file, 10)
+    call Run("perl", 15)
 endf
 
 fu! Run(command, winSize)
-    on
-    pedit RunCommand
-
-    exe "normal \<C-W>Z"
-    exe "normal \<C-W>P"
-    exe "normal \<C-W>J"
-
-    setlocal noswapfile
-    setlocal buftype=nowrite
-    setlocal bufhidden=delete " d
-	map <buffer> q :quit<CR>
-
+    only
+    %y
+    call NewThrowawayBuffer()
+    wincmd J
     exec "resize " . a:winSize
-    exe "%!" . a:command
+    norm! p
+    exec "%!" . a:command
     0 read !date
     echo a:winSize
     append
 ----------------------------
 .
-    exe "normal G"
-    exe "normal \<C-W>W"
+    wincmd w
 endf
 "}}}
 
-
-" TwitVim
-let twitvim_browser_cmd="firefox"
-nmap <Leader>tf :FriendsTwitter<CR>
-
-let g:vimchat_statusicon=0
 
 " vim:fdm=marker:
