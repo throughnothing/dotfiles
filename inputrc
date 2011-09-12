@@ -1,0 +1,4 @@
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\C-k": history-search-backward
+"\C-j": history-search-forward
