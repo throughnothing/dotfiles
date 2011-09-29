@@ -50,6 +50,7 @@ call pathogen#runtime_append_all_bundles()
 
 "Vim-script-runner
 let g:script_runner_map = "<Leader>sx"
+let g:script_runner_perl = "perl -MData::Dump"
 
 let mapleader = ","
 " Tell GPG to use ascii files for new files

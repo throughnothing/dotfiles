@@ -3,7 +3,7 @@
 " Version: 0.0.1
 
 let s:ft_cmd = {
-    \'json' : 'json_verify',
+    \'json' : 'json_pp',
 \}
 
 if !exists('g:script_runner_map')
@@ -28,9 +28,9 @@ endf
 fu! Run(cmd)
     let s:real_cmd = a:cmd
 
-    if(exists("g:script_runner_cmds") && has_key(g:script_runner_cmds, a:cmd))
+    if(exists("g:script_runner_".a:cmd))
         " Use the users custom setting
-        let s:real_cmd = g:script_runner_cmds[a:cmd]
+        execute "let s:real_cmd = g:script_runner_".a:cmd
     elseif(has_key(s:ft_cmd, a:cmd))
         " Use our default, if there is one
         let s:real_cmd = s:ft_cmd[a:cmd]
