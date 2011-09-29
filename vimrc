@@ -48,6 +48,9 @@ autocmd BufRead *.mako set ft=html
 au BufRead,BufNewFile *.mako            setfiletype html
 call pathogen#runtime_append_all_bundles() 
 
+"Vim-script-runner
+let g:script_runner_map = "<Leader>sx"
+
 let mapleader = ","
 " Tell GPG to use ascii files for new files
 let g:GPGPreferArmor = 1
@@ -106,7 +109,7 @@ nmap <C-x>f :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
 "don't want visual mode :)
 nmap Q q
 
-nmap <Leader>sr :sx<CR>
+"nmap <Leader>sr :sx<CR>
 
 "Change tabs
 imap <C-l> <Esc>gt
