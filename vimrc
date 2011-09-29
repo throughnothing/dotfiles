@@ -152,70 +152,8 @@ function! s:VSetSearch()
   let @" = old
 endfunction
 
-map <Leader>f :call BrowserOpen()<CR>
-function! BrowserOpen ()
-  let l:line = getline (".")
-  let l:url = ""
-perl << EOF
-  my $line = VIM::Eval('l:line');
-  $line =~ m/((https?:\/\/|www\.)[^\s",;\t'>]*)\b/;
-  VIM::DoCommand("let l:url = '$1'");
-EOF
-  echo "Opening " . l:url
-  silent exec "!firefox ".l:url
-  redraw!
-endfunction
-nmap <Leader>cu :call CopyURL()<CR>
-function! CopyURL ()
-  let l:line = getline (".")
-  let @* = matchstr (l:line, "http://[^ \",;\t'>]*")
-endfunction
 "}}}
 "{{{ Run Functions
-cabbrev pyx call PythonRun()
-cabbrev br call BashRun()
-cabbrev perlx call PerlRun()
-cabbrev px call PerlRun()
-nmap <Leader>pr :px<CR>
-
-fu! NewThrowawayBuffer()
-    new
-	setlocal noswapfile
-	setlocal buftype=nowrite
-	setlocal bufhidden=delete
-	map <buffer> q :quit<CR>
-endf
-
-fu! PythonRun()
-    call Run("python", 15)
-endf
-
-fu! BashRun()
-    on
-    let l:file = @%
-    call Run("bash " . l:file, 15)
-endf
-
-fu! PerlRun()
-    call Run("perl", 15)
-endf
-
-fu! Run(command, winSize)
-    only
-    %y
-    call NewThrowawayBuffer()
-    wincmd J
-    exec "resize " . a:winSize
-    norm! p
-    exec "%!" . a:command
-    0 read !date
-    echo a:winSize
-    append
-----------------------------
-.
-    wincmd w
-endf
-"}}}
-
+nmap <Leader>pr :perlx<CR>
 
 " vim:fdm=marker:
