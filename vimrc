@@ -1,11 +1,4 @@
-"{{{ Set parameters
-"colorscheme ir_black
-"colorscheme default
-"colorscheme wombat
-"colorscheme vibrantink
 colorscheme vividchalk
-" none of that!
-
 if has("gui_running")
     colorscheme wombat
 endif
@@ -32,11 +25,9 @@ set noignorecase
 set clipboard=unnamed
 set showcmd
 set splitbelow
-"set cindent
 set et
 set mouse -=a
-"}}}
-"{{{ autocmd/filetypes
+
 "Au to source vimrc
 autocmd! bufwritepost .vimrc source %
 autocmd FileType xml set foldmethod=syntax
@@ -56,26 +47,19 @@ au BufRead,BufNewFile *.vapi            setfiletype vala
 autocmd BufRead *.mako set ft=html
 au BufRead,BufNewFile *.mako            setfiletype html
 call pathogen#runtime_append_all_bundles() 
-"}}}
-" {{{ Variables
-" Standard Vim Vars
+
 let mapleader = ","
 " Tell GPG to use ascii files for new files
 let g:GPGPreferArmor = 1
 let g:GPGUseAgent = 0
-" Fold XML Files
-let g:xml_syntax_folding=1
-" VimWiki
-let g:vimwiki_list = [{"path":"~/.wiki/work","path_html":"~/.wiki/work/html" }]
-" For project plugin
-let g:proj_flags="cgst"
-"}}}
-"{{{ Maps
+
 " TwitVim
 let twitvim_browser_cmd="open"
 nmap <Leader>tf :FriendsTwitter<CR>
+
 "Tagbar
 nmap <Leader>tb :TagbarToggle<CR>
+
 " write all files and save session
 nnoremap <Leader>gu :GundoToggle<CR>
 nmap <Leader>sb :set scb!<CR>
@@ -94,14 +78,6 @@ nmap <Leader>gc :Gcommit<CR>
 map <Leader>gh :Gbrowse<CR>
 " Clear entire buffer
 nmap <Leader>db ggVGd
-
-"" Wiki Stuff
-"Make the current word a wikiword
-nmap <Leader>mw bi[[<Esc>wea]]<Esc>
-" Open current wikiword in new split
-nmap <Leader>wws <Plug>VimwikiSplitWord
-nmap <Leader>wwt <Plug>VimwikiSplitWord<C-w>T
-nmap <Leader>wtt <Plug>VimwikiToggleListItem
 
 map K k
 nmap <C-w>t <C-w>]<C-w>T 
@@ -127,12 +103,10 @@ nmap <Leader>g yiw :exe 'grep! -ir -I ' @0 '*'<CR>
 "XML Formatting function
 nmap <C-x>f :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
 
-"allows me to add fold to a function/class (in php only?)
-nmap <C-c>f /{<Enter>%o<Esc>k%?func<Enter>O<Esc>Vj/{<Enter>%jzfzojf(bveykhhpzco<Esc>Vk=j
-nmap <C-c>c O<Esc>Vj/{<Enter>%jzfzojwveykhhpa class<Esc>zco<Esc>
-
 "don't want visual mode :)
 nmap Q q
+
+nmap <Leader>sr :sx<CR>
 
 "Change tabs
 imap <C-l> <Esc>gt
@@ -140,11 +114,9 @@ imap <C-h> <Esc>gT
 nmap <C-l> gt
 nmap <C-h> gT
 
+" * and # search for next/previous of selected text when used in visual mode
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>?<CR>
-"}}}
-"{{{ Misc Functions
-" * and # search for next/previous of selected text when used in visual mode
 function! s:VSetSearch()
   let old = @"
   norm! gvy
@@ -152,8 +124,4 @@ function! s:VSetSearch()
   let @" = old
 endfunction
 
-"}}}
-"{{{ Run Functions
-nmap <Leader>pr :perlx<CR>
 
-" vim:fdm=marker:
