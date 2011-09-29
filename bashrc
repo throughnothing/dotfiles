@@ -86,6 +86,18 @@ dfu() {
 	popd >> /dev/null
 }
 
+#Openstack/Gerrit Functions
+gfr() {
+    if [ -z "$2" ]
+    then
+        echo "Need refs and branch name"
+        exit 0;
+    fi
+    git fetch https://review.openstack.org/p/openstack/nova $1
+    git cherry-pick FETCH_HEAD
+    git checkout -b $2
+}
+
 ## Git bash completion
 #. `brew --prefix`/etc/bash_completion
 
