@@ -23,8 +23,7 @@ foreach my $file_path (glob cwd().'/*'){
 
 # Setup ~/.go if it doesn't exist, and make sure we have Projects
 system "touch \$HOME/.go";
-system "mkdir -p \$HOME/Projects";
-system "mkdir -p \$HOME/.todo";
+system "mkdir -p \$HOME/Projects \$HOME/.todo";
 # git push on commit
 system "echo 'git push' > .git/hooks/post-commit";
 system "chmod 755 .git/hooks/post-commit";

@@ -6,6 +6,8 @@
 #   * optionally:
 #     set $_Z_CMD in .bashrc/.zshrc to change the command (default z).
 #     set $_Z_DATA in .bashrc/.zshrc to change the datafile (default ~/.z).
+#     set $_Z_DEFAULT_PATH in .bashrc/.zshrc to change the default dir to
+#       look in for directory matches (default ~/Projects).
 #   * put something like this in your .bashrc:
 #     . /path/to/z.sh
 #   * put something like this in your .zshrc:
@@ -22,6 +24,33 @@
 #   * z -r foo  # cd to highest ranked dir matching foo
 #   * z -t foo  # cd to most recently accessed dir matching foo
 #   * z -l foo  # list all dirs matching foo (by frecency)
+
+_go() {
+  local datafile="${_Z_DEFAULT_PATH:-$HOME/Projects}"
+  local target=''
+  if [ $# == 0 ]; then
+    target=$HOME
+  else
+    target=$(grep "^$1" $HOME/.go | head -1 | col2)
+  fi
+  if [ $target ]; then
+    pushd "$target" >> /dev/null
+    return
+  fi
+  for f in $(ls $HOME | sort); do
+    echo $f | grep "^$1" > /dev/null
+    if [ "$?" == "0" ]; then
+      pushd $HOME/`echo $f | grep "^$1" | head -n 1` >> /dev/null
+    fi
+  done
+  for f in $(ls $HOME/Projects | sort); do
+    echo $f | grep -q "^$1"
+    if [ $? -eq 0 ]; then
+      pushd "$HOME/Projects/$f" >> /dev/null
+      return
+    fi
+  done
+}
 
 _z() {
 
@@ -165,7 +194,8 @@ _z() {
    }
   ' "$datafile")"
   [ $? -gt 0 ] && return
-  [ "$cd" ] && cd "$cd"
+  [ "$cd" ] && cd "$cd" && return
+  _go $fnd
  fi
 }
 

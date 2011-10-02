@@ -101,7 +101,7 @@ gfr() {
 }
 
 ## Git bash completion
-#. `brew --prefix`/etc/bash_completion
+. `brew --prefix`/etc/bash_completion
 
 # Perlbrew stuff
 [[ -f ~/perl5/perlbrew/etc/bashrc ]] && . ~/perl5/perlbrew/etc/bashrc
