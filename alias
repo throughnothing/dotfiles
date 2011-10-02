@@ -63,3 +63,6 @@ alias vpc_get_novarc='scp root@172.19.0.3:novarc .'
 
 # OSX Postgres
 alias psql='/Library/PostgreSQL/9.0/bin/psql'
+
+#T todo list
+alias t='python ~/.scripts/t.py --task-dir ~/.todo --list todo --delete-if-empty'
