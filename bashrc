@@ -22,7 +22,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # =============================================================================
-export _Z_CMD="g"
 . ~/.scripts/z.sh
 . ~/.alias
 set -o vi
@@ -45,10 +44,29 @@ function parse_git_branch {
 
 function num_git_commits_ahead {
 	num=$(git status 2> /dev/null | grep "Your branch is ahead of" | awk '{split($0,a," "); print a[9];}' 2> /dev/null) || return
-	if [[ "$num" != "" ]]; then
-		echo "+$num"
-	fi
+	[ "$num" ] && echo "+$num"
 }
+
+_go() {
+  local default_path="${GO_DEFAULT_PATH:-$HOME/Projects}"
+  local target=$(grep "^$1" $HOME/.go | head -1 | awk '{print $2}')
+
+  [ "$target" ] && pushd "$target" >> /dev/null && return
+
+  for f in $(ls -a $HOME | sort); do
+    echo $f | grep -qi "^$1"
+    [ $? -eq 0 ] && pushd $HOME/$f >> /dev/null && return
+  done
+  for f in $(ls -a $default_path | sort); do
+    echo $f | grep -qi "^$1"
+    [ $? -eq 0 ] && pushd "$default_path/$f" >> /dev/null && return
+  done
+}
+
+g(){
+    z $* || _go $*
+}
+
 
 dfc() {
 	pushd ~/.dotfiles >> /dev/null
@@ -60,18 +78,6 @@ dfu() {
 	pushd ~/.dotfiles >> /dev/null
 	git stash && git pull && git stash pop
 	popd >> /dev/null
-}
-
-#Openstack/Gerrit Functions
-gfr() {
-    if [ -z "$2" ]
-    then
-        echo "Need refs and branch name"
-        exit 0;
-    fi
-    git fetch https://review.openstack.org/p/openstack/nova $1
-    git cherry-pick FETCH_HEAD
-    git checkout -b $2
 }
 
 ## Git bash completion
