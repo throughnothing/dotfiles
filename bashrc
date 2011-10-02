@@ -43,7 +43,9 @@ function parse_git_branch {
 }
 
 function num_git_commits_ahead {
-	num=$(git status 2> /dev/null | grep "Your branch is ahead of" | awk '{split($0,a," "); print a[9];}' 2> /dev/null) || return
+	num=$(git status 2> /dev/null \
+        | grep "Your branch is ahead of" \
+        | awk '{split($0,a," "); print a[9];}' 2> /dev/null) || return
 	[ "$num" ] && echo "+$num"
 }
 
