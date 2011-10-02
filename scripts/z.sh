@@ -37,14 +37,14 @@ _go() {
     pushd "$target" >> /dev/null
     return
   fi
-  for f in $(ls $HOME | sort); do
+  for f in $(ls -a $HOME | sort); do
     echo $f | grep "^$1" > /dev/null
     if [ "$?" == "0" ]; then
       pushd $HOME/`echo $f | grep "^$1" | head -n 1` >> /dev/null
       return
     fi
   done
-  for f in $(ls $default_path | sort); do
+  for f in $(ls -a $default_path | sort); do
     echo $f | grep -q "^$1"
     if [ $? -eq 0 ]; then
       pushd "$default_path/$f" >> /dev/null

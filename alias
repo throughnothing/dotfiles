@@ -15,7 +15,6 @@ alias col1="awk '{print \$1}'"
 alias col2="awk '{print \$2}'"
 alias col3="awk '{print \$3}'"
 
-alias t='~/.scripts/t'
 alias vigo='vim ~/.go'
 alias vimw='vim -c :VimwikiGoHome'
 
