@@ -50,32 +50,6 @@ function num_git_commits_ahead {
 	fi
 }
 
-go() {
-    target=''
-    if [ $# == 0 ]; then
-        target=$HOME
-    else
-        target=$(grep "^$1" $HOME/.go | head -1 | col2)
-    fi
-    if [ $target ]; then
-        pushd "$target" >> /dev/null
-        return
-    fi
-    for f in $(ls $HOME | sort); do
-        echo $f | grep "^$1" > /dev/null
-		if [ "$?" == "0" ]; then
-			pushd $HOME/`echo $f | grep "^$1" | head -n 1` >> /dev/null
-		fi
-    done
-    for f in $(ls $HOME/Projects | sort); do
-        echo $f | grep -q "^$1"
-        if [ $? -eq 0 ]; then
-            pushd "$HOME/Projects/$f" >> /dev/null
-            return
-        fi
-    done
-}
-
 dfc() {
 	pushd ~/.dotfiles >> /dev/null
 	git add . && git add -u . && git commit -m "automated update"
