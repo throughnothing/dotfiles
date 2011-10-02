@@ -77,6 +77,9 @@ gfr() {
 ## Git bash completion
 . `brew --prefix`/etc/bash_completion
 
+## Github stuff if it exists
+[[ -f ~/.github ]] && . ~/.github
+
 # Perlbrew stuff
 [[ -f ~/perl5/perlbrew/etc/bashrc ]] && . ~/perl5/perlbrew/etc/bashrc
 

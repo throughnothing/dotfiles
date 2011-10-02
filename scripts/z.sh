@@ -31,7 +31,7 @@ _go() {
   if [ $# == 0 ]; then
     target=$HOME
   else
-    target=$(grep "^$1" $HOME/.go | head -1 | col2)
+    target=$(grep "^$1" $HOME/.go | head -1 | awk '{print \$2}')
   fi
   if [ $target ]; then
     pushd "$target" >> /dev/null
