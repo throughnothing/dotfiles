@@ -50,6 +50,7 @@ function num_git_commits_ahead {
 }
 
 _go() {
+  [ $# -eq 0 ] && return
   local default_path="${GO_DEFAULT_PATH:-$HOME/Projects}"
   local target=$(grep "^$1" $HOME/.go | head -1 | awk '{print $2}')
 
