@@ -26,7 +26,7 @@
 #   * z -l foo  # list all dirs matching foo (by frecency)
 
 _go() {
-  local datafile="${_Z_DEFAULT_PATH:-$HOME/Projects}"
+  local default_path="${_Z_DEFAULT_PATH:-$HOME/Projects}"
   local target=''
   if [ $# == 0 ]; then
     target=$HOME
@@ -41,12 +41,13 @@ _go() {
     echo $f | grep "^$1" > /dev/null
     if [ "$?" == "0" ]; then
       pushd $HOME/`echo $f | grep "^$1" | head -n 1` >> /dev/null
+      return
     fi
   done
-  for f in $(ls $HOME/Projects | sort); do
+  for f in $(ls $default_path | sort); do
     echo $f | grep -q "^$1"
     if [ $? -eq 0 ]; then
-      pushd "$HOME/Projects/$f" >> /dev/null
+      pushd "$default_path/$f" >> /dev/null
       return
     fi
   done
