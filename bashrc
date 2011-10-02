@@ -22,6 +22,8 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # =============================================================================
+export _Z_CMD="g"
+. ~/.scripts/z.sh
 . ~/.alias
 set -o vi
 
