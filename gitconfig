@@ -6,7 +6,7 @@
 [advice]
     statusHints = false
 [core]
-	excludesfile = /home/throughnothing/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [alias]
     mnc = merge --no-commit
     co = checkout
