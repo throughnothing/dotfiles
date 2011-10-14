@@ -14,4 +14,3 @@
     bd = branch -D
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     rbm = rebase -i master
-    review = !sh `git rev-parse --show-toplevel`/tools/rfc.sh
