@@ -19,4 +19,3 @@
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
     ls = ls-files
     rbm = rebase -i master
-    review = !sh `git rev-parse --show-toplevel`/tools/rfc.sh
