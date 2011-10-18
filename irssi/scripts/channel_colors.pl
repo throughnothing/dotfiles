@@ -66,8 +66,8 @@ sub sig_ignore
 
 Irssi::signal_add('message public', 'sig_msg_public');
 Irssi::signal_add('message private', 'sig_msg_private');
-Irssi::signal_add('message join', 'sig_ignore');
-Irssi::signal_add('message quit', 'sig_ignore');
-Irssi::signal_add('message nick', 'sig_ignore');
-Irssi::signal_add('message part', 'sig_ignore');
+#Irssi::signal_add('message join', 'sig_ignore');
+#Irssi::signal_add('message quit', 'sig_ignore');
+#Irssi::signal_add('message nick', 'sig_ignore');
+#Irssi::signal_add('message part', 'sig_ignore');
 Irssi::command_bind("channel_colors_list","channel_colors_list");

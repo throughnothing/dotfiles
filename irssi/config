@@ -6,8 +6,8 @@ servers = (
     autoconnect = "yes";
   },
   {
-    address = "irc.gnome.org";
-    chatnet = "gnome";
+    address = "irc.perl.org";
+    chatnet = "perl";
     port = "6667";
     autoconnect = "yes";
   }
@@ -21,12 +21,14 @@ chatnets = {
     max_query_chans = "5";
   };
   gnome = { type = "IRC"; };
+  perl = { type = "IRC"; };
 };
 
 channels = (
-  { name = "#node.js"; chatnet = "fnode"; autojoin = "yes"; },
-  { name = "#openstack"; chatnet = "fnode"; autojoin = "yes"; },
+  { name = "#crowdtilt"; chatnet = "fnode"; autojoin = "yes"; },
   { name = "#rackjam"; chatnet = "fnode"; autojoin = "yes"; },
+  { name = "#perl"; chatnet = "fnode"; autojoin = "yes"; },
+  { name = "#vim"; chatnet = "fnode"; autojoin = "yes"; },
 
   "aliases",
   {
@@ -206,5 +208,7 @@ settings = {
     user_name = "throughnothing";
     nick = "throughnothing";
   };
-  "fe-text" = { actlist_sort = "refnum"; };
+  "fe-text" = { actlist_sort = "refnum"; indent = "26"; };
+  "fe-common/core" = { theme = "envy"; };
 };
+ignores = ( { mask = "roodytood"; level = "ALL"; } );
