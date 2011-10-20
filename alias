@@ -61,7 +61,7 @@ alias vpc_clear_ssh="sed -i -e '/^172\.19\.0.*$/d' ~/.ssh/known_hosts"
 alias vpc_get_novarc='scp root@172.19.0.3:novarc .'
 
 # OSX Postgres
-alias psql='/Library/PostgreSQL/9.0/bin/psql'
+alias psql='/Library/PostgreSQL/9.1/bin/psql'
 
 #T todo list
 alias t='python ~/.scripts/t.py --task-dir ~/.todo --list todo --delete-if-empty'
