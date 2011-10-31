@@ -68,3 +68,6 @@ alias t='python ~/.scripts/t.py --task-dir ~/.todo --list todo --delete-if-empty
 
 #go alias
 alias go='g'
+
+# Instapaper
+alias ip='~/Projects/instapaper/lwp.pl'

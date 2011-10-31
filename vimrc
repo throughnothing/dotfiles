@@ -19,7 +19,7 @@ set foldmethod=indent
 set foldlevel=0
 set foldnestmax=20
 set tags=tags;
-set pastetoggle=<C-i>
+set pastetoggle=<C-p>
 set shm=aI
 set noignorecase
 set clipboard=unnamed
@@ -60,6 +60,11 @@ let g:GPGUseAgent = 0
 " TwitVim
 let twitvim_browser_cmd="open"
 nmap <Leader>tf :FriendsTwitter<CR>
+
+" Command-T file finder
+nnoremap <silent> <Leader>T :CommandT<cr>
+let g:CommandTAcceptSelectionMap = '<CR>'
+let g:CommandTAcceptSelectionTabMap = '<C-t>'
 
 "Tagbar
 nmap <Leader>tb :TagbarToggle<CR>
