@@ -84,7 +84,8 @@ dfu() {
 }
 
 ## Git bash completion
-#. `brew --prefix`/etc/bash_completion
+[[ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash  ]] &&  \
+    . `brew --prefix`/etc/bash_completion.d/git-completion.bash 
 
 ## Github stuff if it exists
 [[ -f ~/.github ]] && . ~/.github
