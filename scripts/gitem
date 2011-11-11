@@ -1,0 +1,7 @@
+#!/usr/bin/env perl
+for ( glob "./*" ){
+    if( -d $_  && -d "$_/.git"){
+        print "updating $_\n";
+        system "cd $_ && git pull"
+    }
+}
