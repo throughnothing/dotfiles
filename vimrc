@@ -28,6 +28,8 @@ set splitbelow
 set et
 set mouse -=a
 
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
 "Au to source vimrc
 autocmd! bufwritepost .vimrc source %
 autocmd FileType xml set foldmethod=syntax
@@ -56,6 +58,10 @@ let mapleader = ","
 " Tell GPG to use ascii files for new files
 let g:GPGPreferArmor = 1
 let g:GPGUseAgent = 0
+"
+" Heresy
+inoremap <c-a> <esc>I
+inoremap <c-e> <esc>A
 
 " TwitVim
 let twitvim_browser_cmd="open"
@@ -133,4 +139,7 @@ function! s:VSetSearch()
   let @" = old
 endfunction
 
-
+augroup VimperatorYPentadactyl
+    au! BufRead vimperator-*,pentadactyl-* nnoremap <buffer> ZZ :silent write \| :bd \| :macaction hide:<CR>
+    au BufRead vimperator-*,pentadactyl-* imap <buffer> ZZ <Esc>ZZ
+augroup END

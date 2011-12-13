@@ -8,6 +8,8 @@
 [core]
 	excludesfile = ~/.gitignore_global
 [alias]
+    cleanup = gc --prune=now
+    head = log -n1 --pretty=%H
     mnc = merge --no-commit
     co = checkout
     com = commit -m

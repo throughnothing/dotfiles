@@ -1,7 +1,25 @@
 #!/usr/bin/env perl
+use Getopt::Std;
+
+my %opts;
+getopts( 'fms', \%opts );
+# -f   Fetch --all only (no merge)
+# -s   stash if there are any changes
+# -m   checkout master in each repo
+
 for ( glob "./*" ){
     if( -d $_  && -d "$_/.git"){
         print "updating $_\n";
-        system "cd $_ && git pull"
+        chdir($_);
+
+        system "git fetch --all 2>&1 > /dev/null";
+        system "git stash 2>&1 > /dev/null" if( $opts{s} );
+        system "git merge origin/master 2>&1 > /dev/null"
+            unless $opts{f};
+        system "git stash pop 2>&1 > /dev/null" if( $opts{s} );
+
+        system "git checkout master" if ( $opts{m} );
+
+        chdir('../');
     }
 }
