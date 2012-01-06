@@ -83,6 +83,25 @@ dfu() {
 	popd >> /dev/null
 }
 
+#Git ProTip - Delete all local branches that have been merged into HEAD
+git-purge-local-branches() {
+  [ -z $1 ] && return
+  #git branch -d `git branch --merged $1 | grep -v '^*' | grep -v 'master' | grep -v 'dev' | tr -d '\n'`
+  BRANCHES=`git branch --merged $1 | grep -v '^*' | grep -v 'master' | grep -v 'dev' | tr -d '\n'`
+  echo "Running: git branch -d $BRANCHES"
+  git branch -d $BRANCHES
+}
+
+#Bonus - Delete all remote branches that are merged into HEAD (thanks +Kyle Neath)
+git-purge-remote-branches() {
+  [ -z $1 ] && return
+
+  #git push origin `git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
+  BRANCHES=git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'
+  echo "Running: git push origin $BRANCHES"
+  git push origin $BRANCHES
+}
+
 ## Git bash completion
 [[ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash  ]] &&  \
     . `brew --prefix`/etc/bash_completion.d/git-completion.bash 
