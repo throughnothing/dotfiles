@@ -97,7 +97,7 @@ git-purge-remote-branches() {
   [ -z $1 ] && return
 
   #git push origin `git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
-  BRANCHES=git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'
+  BRANCHES=`git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
   echo "Running: git push origin $BRANCHES"
   git push origin $BRANCHES
 }
