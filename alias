@@ -56,6 +56,9 @@ alias tmux='TERM=xterm-256color tmux'
 #BZR
 alias bzrd='bzr diff | vim -'
 
+#Vagrant
+alias vssh='go ct && vagrant ssh'
+
 #OVPC clear ssh keys
 alias vpc_clear_ssh="sed -i -e '/^172\.19\.0.*$/d' ~/.ssh/known_hosts"
 alias vpc_get_novarc='scp root@172.19.0.3:novarc .'
