@@ -4,6 +4,8 @@ if has("gui_running")
 endif
 
 set guioptions=
+set laststatus=2
+set guifont=Menlo\ for\ Powerline
 syntax on
 set modeline
 set hls
@@ -50,6 +52,24 @@ autocmd BufRead *.mako set ft=html
 au BufRead,BufNewFile *.mako            setfiletype html
 call pathogen#runtime_append_all_bundles() 
 
+" Powerline
+let g:Powerline_symbols = 'fancy'
+
+" CTRLP
+" Set Ctrl-P to show match at top of list instead of at bottom, which is so
+" stupid that it's not default
+let g:ctrlp_match_window_reversed = 0
+
+" Tell Ctrl-P to keep the current VIM working directory when starting a
+" search, another really stupid non default
+let g:ctrlp_working_path_mode = 0
+
+" Ctrl-P ignore target dirs so VIM doesn't have to! Yay!
+let g:ctrlp_custom_ignore = {'dir':  '\/target\/\'}
+
+" Open a new file in a tab by default
+let g:ctrlp_open_multi = '10t'
+
 "Vim-script-runner
 let g:script_runner_map = "<Leader>sx"
 let g:script_runner_perl = "perl -MData::Dump"
@@ -84,7 +104,9 @@ nmap [[ [{
 nmap ]] ]}
 nmap <Leader>P :Project<CR>
 nmap <Leader>ct :CommandT<CR>
-nmap <Leader>nt :NERDTreeToggle<CR>
+
+let g:nerdtree_tabs_open_on_gui_startup=0
+nmap <Leader>nt :NERDTreeTabsToggle<CR>
 " Git Stuff
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gd :Gdiff<CR>
