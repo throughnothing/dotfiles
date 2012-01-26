@@ -1,4 +1,4 @@
-colorscheme vividchalk
+colorscheme vibrantink
 if has("gui_running")
     colorscheme wombat
 endif
