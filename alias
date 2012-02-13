@@ -47,6 +47,7 @@ alias gdsmv="git diff | mvim -"
 alias gdsv="git diff | vim -"
 alias gdmv="git diff | mvim -"
 alias gdv="git diff | vim -"
+alias vim="mvim -v"
 
 alias gca='gclcli agenda'
 alias pyserve='python -m SimpleHTTPServer'
