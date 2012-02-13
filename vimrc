@@ -29,6 +29,8 @@ set showcmd
 set splitbelow
 set et
 set mouse -=a
+set textwidth=80
+set cc=+1
 
 " Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>="
@@ -79,9 +81,10 @@ let mapleader = ","
 let g:GPGPreferArmor = 1
 let g:GPGUseAgent = 0
 "
+inoremap jj <esc>
 " Heresy
-inoremap <c-a> <esc>I
-inoremap <c-e> <esc>A
+inoremap <C-i> <esc>I
+inoremap <C-a> <esc>
 
 " TwitVim
 let twitvim_browser_cmd="open"
