@@ -1,12 +1,10 @@
-colorscheme vibrantink
-if has("gui_running")
-    colorscheme wombat
-endif
+syntax on
+set background=dark
+colorscheme solarized
 
 set guioptions=
 set laststatus=2
 set guifont=Menlo\ for\ Powerline
-syntax on
 set modeline
 set hls
 set ls=2
@@ -54,6 +52,8 @@ autocmd BufRead *.mako set ft=html
 au BufRead,BufNewFile *.mako            setfiletype html
 call pathogen#runtime_append_all_bundles() 
 
+" Ctags
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 " Powerline
 let g:Powerline_symbols = 'fancy'
 
