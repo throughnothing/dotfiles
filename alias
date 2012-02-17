@@ -75,3 +75,6 @@ alias go='g'
 
 # Instapaper
 alias ip='~/Projects/instapaper/lwp.pl'
+
+#DuckDuckGo
+alias ddg='duckduckgo'
