@@ -95,6 +95,7 @@ git-purge-local-branches() {
 #Bonus - Delete all remote branches that are merged into HEAD (thanks +Kyle Neath)
 git-purge-remote-branches() {
   [ -z $1 ] && return
+  git remote prune origin
 
   #git push origin `git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
   BRANCHES=`git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
