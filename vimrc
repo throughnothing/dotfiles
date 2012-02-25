@@ -2,6 +2,7 @@ syntax on
 set background=dark
 colorscheme solarized
 
+set hidden " for lustyjuggler/ explorer
 set guioptions=
 set laststatus=2
 set guifont=Menlo\ for\ Powerline
@@ -52,6 +53,8 @@ autocmd BufRead *.mako set ft=html
 au BufRead,BufNewFile *.mako            setfiletype html
 call pathogen#runtime_append_all_bundles() 
 
+"let g:textobj_between_no_default_key_mappings = 1
+let g:neocomplcache_enable_at_startup = 1
 " Ctags
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 " Powerline
@@ -113,7 +116,7 @@ nmap <Leader>nt :NERDTreeTabsToggle<CR>
 " Git Stuff
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gd :Gdiff<CR>
-nmap <Leader>gl :Glog<CR>
+nmap <Leader>gl :Extradite!<CR>
 nmap <Leader>gc :Gcommit<CR>
 map <Leader>gh :Gbrowse<CR>
 " Clear entire buffer

@@ -11,7 +11,6 @@
     cleanup = gc --prune=now
     head = log -n1 --pretty=%H
     mnc = merge --no-commit
-    co = checkout
     com = commit -m
     bd = branch -D
     df = diff
@@ -24,6 +23,84 @@
     rbd = rebase dev
     sp = stash pop
     su = branch --set-upstream
+
+
+    # add
+    a = add # add
+    chunkyadd = add --patch # stage commits chunk by chunk
+
+    # branch
+    b = branch -v # branch (verbose)
+
+    # commit
+    c = commit -m # commit with message
+    ca = commit -am # commit all with message
+    ci = commit # commit
+    amend = commit --amend # ammend your last commit
+    ammend = commit --amend # ammend your last commit
+
+    # checkout
+    co = checkout # checkout
+    nb = checkout -b 
+
+    # cherry-pick
+    cp = cherry-pick -x # grab a change from a branch
+
+    # diff
+    d = diff # diff unstaged changes
+    dc = diff --cached # diff staged changes
+    last = diff HEAD^ # diff last committed change
+
+    # log
+    log = log --decorate --graph --date=short
+    l = log
+    changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+    short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+    changelog = log --pretty=format:\" * %s\"
+    shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+
+    # FROM https://github.com/skwp/dotfiles/blob/master/git/gitconfig
+    # pull
+    pl = pull # pull
+
+    # push
+    ps = push # push
+
+    # rebase
+    rc = rebase --continue # continue rebase
+    rs = rebase --skip # skip rebase
+
+    # remote
+    r = remote -v # show remotes (verbose)
+
+    # reset
+    unstage = reset HEAD # remove files from index (tracking)
+    uncommit = reset --soft HEAD^
+    filelog = log -u # show changes to a file
+    mt = mergetool # fire up the merge tool
+
+    # stash
+    ss = stash # stash changes
+    sl = stash list # list stashes
+    sa = stash apply # apply stash (restore changes)
+    sp = stash pop # pop stash (restore changes)
+    sd = stash drop # drop stashes (destory changes)
+
+    # status
+    s = status # status
+    st = status # status
+    stat = status # status
+
+    # tag
+    t = tag -n # show tags with <n> lines of each tag message
+
+    # svn helpers
+    svnr = svn rebase
+    svnd = svn dcommit
+    svnl = svn log --oneline --show-commit
+
+
+
     # From: http://pyrtsa.posterous.com/aligning-your-git-logs
     l50 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m %-50s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
     l80 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m %-80s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
