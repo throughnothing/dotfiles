@@ -84,7 +84,7 @@ dfu() {
 }
 
 #Git ProTip - Delete all local branches that have been merged into HEAD
-git-purge-local-branches() {
+git_purge_local_branches() {
   [ -z $1 ] && return
   #git branch -d `git branch --merged $1 | grep -v '^*' | grep -v 'master' | grep -v 'dev' | tr -d '\n'`
   BRANCHES=`git branch --merged $1 | grep -v '^*' | grep -v 'master' | grep -v 'dev' | tr -d '\n'`
@@ -93,7 +93,7 @@ git-purge-local-branches() {
 }
 
 #Bonus - Delete all remote branches that are merged into HEAD (thanks +Kyle Neath)
-git-purge-remote-branches() {
+git_purge_remote_branches() {
   [ -z $1 ] && return
   git remote prune origin
 
@@ -101,6 +101,12 @@ git-purge-remote-branches() {
   BRANCHES=`git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
   echo "Running: git push origin $BRANCHES"
   git push origin $BRANCHES
+}
+
+git_purge() {
+  [ -z $1 ] && return
+  git_purge_local_branches $1
+  git_purge_remote_branches $1
 }
 
 ## Git bash completion
