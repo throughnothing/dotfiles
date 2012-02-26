@@ -91,6 +91,7 @@ inoremap <C-a> <esc>
 
 " TwitVim
 let twitvim_browser_cmd="open"
+nmap <Leader>yr :YRShow<CR>
 nmap <Leader>tf :FriendsTwitter<CR>
 
 " Command-T file finder

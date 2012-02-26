@@ -109,6 +109,16 @@ git_purge() {
   git_purge_remote_branches $1
 }
 
+pullreq() {
+    BRANCH=$1
+    [ -z $1 ] && BRANCH="dev"
+	HEAD=$(git symbolic-ref HEAD 2> /dev/null)
+    [ -z $HEAD ] && return # Return if no head
+    REMOTE=`cat .git/config | grep "remote \"origin\"" -A 2 | tail -n1 | sed 's/.*:\([^\/]*\).*/\1/'`
+    
+    hub pull-request -b $BRANCH -h $REMOTE:${HEAD#refs/heads/}
+}
+
 ## Git bash completion
 [[ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash  ]] &&  \
     . `brew --prefix`/etc/bash_completion.d/git-completion.bash 
