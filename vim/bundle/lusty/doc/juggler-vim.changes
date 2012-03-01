@@ -1,0 +1,1 @@
+- Add support for Dvorak keyboard layout.  Enable it with 'let g:LustyJugglerKeyboardLayout = "dvorak"'. (Chris Lasher)
