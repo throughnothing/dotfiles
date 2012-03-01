@@ -1,10 +1,11 @@
-colorscheme vividchalk
-if has("gui_running")
-    colorscheme wombat
-endif
-
-set guioptions=
 syntax on
+set background=dark
+colorscheme solarized
+
+set hidden " for lustyjuggler/ explorer
+set guioptions=
+set laststatus=2
+set guifont=Menlo\ for\ Powerline
 set modeline
 set hls
 set ls=2
@@ -19,7 +20,7 @@ set foldmethod=indent
 set foldlevel=0
 set foldnestmax=20
 set tags=tags;
-set pastetoggle=<C-i>
+set pastetoggle=<C-p>
 set shm=aI
 set noignorecase
 set clipboard=unnamed
@@ -27,7 +28,11 @@ set showcmd
 set splitbelow
 set et
 set mouse -=a
+set textwidth=80
+set cc=+1
 
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
 "Au to source vimrc
 autocmd! bufwritepost .vimrc source %
 autocmd FileType xml set foldmethod=syntax
@@ -48,6 +53,28 @@ autocmd BufRead *.mako set ft=html
 au BufRead,BufNewFile *.mako            setfiletype html
 call pathogen#runtime_append_all_bundles() 
 
+"let g:textobj_between_no_default_key_mappings = 1
+let g:neocomplcache_enable_at_startup = 1
+" Ctags
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+" Powerline
+let g:Powerline_symbols = 'fancy'
+
+" CTRLP
+" Set Ctrl-P to show match at top of list instead of at bottom, which is so
+" stupid that it's not default
+let g:ctrlp_match_window_reversed = 0
+
+" Tell Ctrl-P to keep the current VIM working directory when starting a
+" search, another really stupid non default
+let g:ctrlp_working_path_mode = 0
+
+" Ctrl-P ignore target dirs so VIM doesn't have to! Yay!
+let g:ctrlp_custom_ignore = {'dir':  '\/target\/\'}
+
+" Open a new file in a tab by default
+let g:ctrlp_open_multi = '10t'
+
 "Vim-script-runner
 let g:script_runner_map = "<Leader>sx"
 let g:script_runner_perl = "perl -MData::Dump"
@@ -56,10 +83,21 @@ let mapleader = ","
 " Tell GPG to use ascii files for new files
 let g:GPGPreferArmor = 1
 let g:GPGUseAgent = 0
+"
+inoremap jj <esc>
+" Heresy
+inoremap <C-i> <esc>I
+inoremap <C-a> <esc>
 
 " TwitVim
 let twitvim_browser_cmd="open"
+nmap <Leader>yr :YRShow<CR>
 nmap <Leader>tf :FriendsTwitter<CR>
+
+" Command-T file finder
+nnoremap <silent> <Leader>T :CommandT<cr>
+let g:CommandTAcceptSelectionMap = '<CR>'
+let g:CommandTAcceptSelectionTabMap = '<C-t>'
 
 "Tagbar
 nmap <Leader>tb :TagbarToggle<CR>
@@ -73,11 +111,13 @@ nmap [[ [{
 nmap ]] ]}
 nmap <Leader>P :Project<CR>
 nmap <Leader>ct :CommandT<CR>
-nmap <Leader>nt :NERDTreeToggle<CR>
+
+let g:nerdtree_tabs_open_on_gui_startup=0
+nmap <Leader>nt :NERDTreeTabsToggle<CR>
 " Git Stuff
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gd :Gdiff<CR>
-nmap <Leader>gl :Glog<CR>
+nmap <Leader>gl :Extradite!<CR>
 nmap <Leader>gc :Gcommit<CR>
 map <Leader>gh :Gbrowse<CR>
 " Clear entire buffer
@@ -128,4 +168,7 @@ function! s:VSetSearch()
   let @" = old
 endfunction
 
-
+augroup VimperatorYPentadactyl
+    au! BufRead vimperator-*,pentadactyl-* nnoremap <buffer> ZZ :silent write \| :bd \| :macaction hide:<CR>
+    au BufRead vimperator-*,pentadactyl-* imap <buffer> ZZ <Esc>ZZ
+augroup END
