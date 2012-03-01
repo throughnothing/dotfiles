@@ -7,5 +7,6 @@ map -count -modes=n <C-h> <count><count>gT
 set defsearch=duckduckgo-ssl
 set guioptions=bCrTm
 set newtab=all
+set editor=~/.scripts/mvim-firefox
 
 " vim: set ft=pentadactyl:
