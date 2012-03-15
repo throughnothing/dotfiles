@@ -2,6 +2,8 @@ syntax on
 set background=dark
 colorscheme solarized
 
+set lcs=tab:▹\ ,eol:¬,trail:·,extends:«,precedes:»
+set list!
 set hidden " for lustyjuggler/ explorer
 set guioptions=
 set laststatus=2
@@ -91,6 +93,8 @@ inoremap <C-a> <esc>
 
 " TwitVim
 let twitvim_browser_cmd="open"
+" Delete all trailing spaces from lines
+nmap <Leader><Leader>ds :%s/\s\+$//g<CR>
 nmap <Leader>yr :YRShow<CR>
 nmap <Leader>tf :FriendsTwitter<CR>
 
@@ -120,6 +124,8 @@ nmap <Leader>gd :Gdiff<CR>
 nmap <Leader>gl :Extradite!<CR>
 nmap <Leader>gc :Gcommit<CR>
 map <Leader>gh :Gbrowse<CR>
+" Gist Stuff
+let g:gist_show_privates = 1
 " Clear entire buffer
 nmap <Leader>db ggVGd
 
@@ -130,7 +136,6 @@ nmap <C-w>t <C-w>]<C-w>T
 nmap <Leader>ad A - <Esc>:r!date<CR>kJ
 
 "for showing tabs,etc
-set lcs=tab:▹\ ,eol:¬,trail:·,extends:«,precedes:»
 map <Leader>lt :setlocal list!<CR>
 
 "C-c to escape

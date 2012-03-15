@@ -59,6 +59,7 @@ alias bzrd='bzr diff | vim -'
 
 #Vagrant
 alias vssh='go ct && vagrant ssh'
+alias vpsql='go ct && ssh -i ~/.ssh/vagrant vagrant@33.33.33.10 sudo su postgres psql'
 
 #OVPC clear ssh keys
 alias vpc_clear_ssh="sed -i -e '/^172\.19\.0.*$/d' ~/.ssh/known_hosts"
