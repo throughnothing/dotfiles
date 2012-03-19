@@ -50,6 +50,7 @@ autocmd BufRead *.vala set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
 autocmd BufRead *.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
 au BufRead,BufNewFile *.vala            setfiletype vala
 au BufRead,BufNewFile *.vapi            setfiletype vala
+au BufRead,BufNewFile Rexfile setfiletype perl
 
 autocmd BufRead *.mako set ft=html
 au BufRead,BufNewFile *.mako            setfiletype html
@@ -97,6 +98,10 @@ let twitvim_browser_cmd="open"
 nmap <Leader><Leader>ds :%s/\s\+$//g<CR>
 nmap <Leader>yr :YRShow<CR>
 nmap <Leader>tf :FriendsTwitter<CR>
+
+" Better paste defaults
+nmap p ]p
+nmap P ]P
 
 " Command-T file finder
 nnoremap <silent> <Leader>T :CommandT<cr>

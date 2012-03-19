@@ -39,15 +39,15 @@ stty intr ^X
 bind -m vi-insert C-c:vi-movement-mode
 
 function parse_git_branch {
-	ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-	echo "("${ref#refs/heads/}")" 
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+    echo "("${ref#refs/heads/}")" 
 }
 
 function num_git_commits_ahead {
-	num=$(git status 2> /dev/null \
+    num=$(git status 2> /dev/null \
         | grep "Your branch is ahead of" \
         | awk '{split($0,a," "); print a[9];}' 2> /dev/null) || return
-	[ "$num" ] && echo "+$num"
+    [ "$num" ] && echo "+$num"
 }
 
 _go() {
@@ -73,15 +73,15 @@ g(){
 
 
 dfc() {
-	pushd ~/.dotfiles >> /dev/null
-	git add . && git add -u . && git commit -m "automated update"
-	popd >> /dev/null
+    pushd ~/.dotfiles >> /dev/null
+    git add . && git add -u . && git commit -m "automated update"
+    popd >> /dev/null
 }
 
 dfu() {
-	pushd ~/.dotfiles >> /dev/null
-	git stash && git pull && git stash pop
-	popd >> /dev/null
+    pushd ~/.dotfiles >> /dev/null
+    git stash && git pull && git stash pop
+    popd >> /dev/null
 }
 
 #Git ProTip - Delete all local branches that have been merged into HEAD
@@ -98,16 +98,16 @@ git_purge_remote_branches() {
   [ -z $1 ] && return
   git remote prune origin
 
-  #git push origin `git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
   BRANCHES=`git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
   echo "Running: git push origin $BRANCHES"
   git push origin $BRANCHES
 }
 
 git_purge() {
-  [ -z $1 ] && return
-  git_purge_local_branches $1
-  git_purge_remote_branches $1
+  branch=$1
+  [ -z $branch ] && branch="dev"
+  git_purge_local_branches $branch
+  git_purge_remote_branches $branch
 }
 
 pullreq() {
