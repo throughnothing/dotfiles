@@ -1,4 +1,5 @@
 syntax on
+
 set background=dark
 colorscheme solarized
 
@@ -55,6 +56,11 @@ au BufRead,BufNewFile Rexfile setfiletype perl
 autocmd BufRead *.mako set ft=html
 au BufRead,BufNewFile *.mako            setfiletype html
 call pathogen#runtime_append_all_bundles() 
+
+" Make :W work like :w
+:cmap W w
+:cmap w:w w
+
 
 "let g:textobj_between_no_default_key_mappings = 1
 let g:neocomplcache_enable_at_startup = 1
