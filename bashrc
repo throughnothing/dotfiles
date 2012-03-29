@@ -111,12 +111,12 @@ git_purge() {
 }
 
 pullreq() {
-    [ -z $BRANCH ] && BRANCH="dev"
-    HEAD=$(git symbolic-ref HEAD 2> /dev/null)
-    [ -z $HEAD ] && return # Return if no head
-    REMOTE=`cat .git/config | grep "remote \"origin\"" -A 2 | tail -n1 | sed 's/.*:\([^\/]*\).*/\1/'`
+  [ -z $BRANCH ] && BRANCH="dev"
+  HEAD=$(git symbolic-ref HEAD 2> /dev/null)
+  [ -z $HEAD ] && return # Return if no head
+  REMOTE=`cat .git/config | grep "remote \"origin\"" -A 2 | grep "url" | sed 's/.*:\([^\/]*\).*/\1/'`
 
-    hub pull-request -b $BRANCH -h $REMOTE:${HEAD#refs/heads/} $1
+  hub pull-request -b $BRANCH -h $REMOTE:${HEAD#refs/heads/} $1
 }
 
 opullreq() {

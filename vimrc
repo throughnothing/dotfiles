@@ -58,8 +58,8 @@ au BufRead,BufNewFile *.mako            setfiletype html
 call pathogen#runtime_append_all_bundles() 
 
 " Make :W work like :w
-:cmap W w
-:cmap w:w w
+":cmap W w
+":cmap w:w w
 
 
 "let g:textobj_between_no_default_key_mappings = 1
@@ -132,7 +132,12 @@ nmap <Leader>nt :NERDTreeTabsToggle<CR>
 " Git Stuff
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gd :Gdiff<CR>
-nmap <Leader>gl :Extradite!<CR>
+nmap <Leader>gds :Gdiff --staged<CR>
+nnoremap <Leader>df :tabe diff<CR>:set ft=diff fdm=manual noswf bt=nowrite bh=delete<cr>:r !git diff<CR>ggdd
+nnoremap <Leader>dfs :tabe diff<CR>:set ft=diff fdm=manual noswf bt=nowrite bh=delete<cr>:r !git diff --staged<CR>ggdd
+nnoremap <Leader>gl :tabe gitlog<CR>:set ft=git fdm=manual noswf bt=nowrite bh=delete<cr>:r !git log<CR>ggdd
+nnoremap <Leader>glp :tabe gitlog<CR>:set ft=git fdm=manual noswf bt=nowrite bh=delete<cr>:r !git log -p<CR>ggdd
+nmap <Leader>glf :Extradite!<CR>
 nmap <Leader>gc :Gcommit<CR>
 map <Leader>gh :Gbrowse<CR>
 " Gist Stuff
