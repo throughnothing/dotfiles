@@ -32,7 +32,10 @@ set splitbelow
 set et
 set mouse -=a
 set textwidth=80
-set cc=+1
+try
+    set cc=+1
+catch
+endtry
 
 " Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>="
