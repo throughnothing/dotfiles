@@ -86,13 +86,16 @@ let g:ctrlp_open_multi = '10t'
 
 "Vim-script-runner
 let g:script_runner_map = "<Leader>sx"
-let g:script_runner_perl = "perl -MData::Dump"
+let g:script_runner_perl = "perl -Ilib -MData::Dump"
 
 let mapleader = ","
 " Tell GPG to use ascii files for new files
 let g:GPGPreferArmor = 1
 let g:GPGUseAgent = 0
 "
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': [] }
 inoremap jj <esc>
 " Heresy
 inoremap <C-i> <esc>I
