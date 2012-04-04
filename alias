@@ -43,11 +43,14 @@ alias gp='git pull'
 alias gpo='git push origin'
 alias gfa='git fetch --all'
 alias gx='open -a Gitx'
-alias gdsmv="git diff | mvim -"
 alias gdsv="git diff | vim -"
-alias gdmv="git diff | mvim -"
 alias gdv="git diff | vim -"
-alias vim="mvim -v"
+
+if [ `command -v mvim` ]; then
+    alias vim="mvim -v"
+    alias gdsmv="git diff | mvim -"
+    alias gdmv="git diff | mvim -"
+fi
 
 alias gca='gclcli agenda'
 alias pyserve='python -m SimpleHTTPServer'
