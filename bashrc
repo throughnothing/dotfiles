@@ -40,7 +40,7 @@ bind -m vi-insert C-c:vi-movement-mode
 
 function parse_git_branch {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    echo "("${ref#refs/heads/}")" 
+    echo "("${ref#refs/heads/}")"
 }
 
 function num_git_commits_ahead {
@@ -124,8 +124,10 @@ opullreq() {
 }
 
 ## Git bash completion
+# Only if we have brew
+[[ `command -v brew` ]] &&
 [[ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash  ]] &&  \
-    . `brew --prefix`/etc/bash_completion.d/git-completion.bash 
+    . `brew --prefix`/etc/bash_completion.d/git-completion.bash
 
 ## Github stuff if it exists
 [[ -f ~/.github ]] && . ~/.github
