@@ -65,6 +65,7 @@ call pathogen#runtime_append_all_bundles()
 ":cmap w:w w
 
 
+let g:github_user = 'throughnothing'
 "let g:textobj_between_no_default_key_mappings = 1
 let g:neocomplcache_enable_at_startup = 1
 " Ctags
@@ -90,6 +91,7 @@ let g:ctrlp_open_multi = '10t'
 "Vim-script-runner
 let g:script_runner_map = "<Leader>sx"
 let g:script_runner_perl = "perl -Ilib -MData::Dump"
+let g:script_runner_javascript = "node"
 
 let mapleader = ","
 " Tell GPG to use ascii files for new files

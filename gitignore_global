@@ -22,7 +22,7 @@
 
 # Logs and databases #
 ######################
-#*.log
+*.log
 #*.sql
 #*.sqlite
 
@@ -34,6 +34,8 @@ Icon?
 Thumbs.db
 *.swo
 *.swp
+*.swn
 *~
 *.DS_Store
 *.git
+*.pid

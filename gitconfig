@@ -41,7 +41,7 @@
     # commit
     c = commit # commit with message
     ca = commit -a # commit all with message
-    cam = commit -a --amend # commit all ammended
+    cam = commit --amend # commit all ammended
     ci = commit # commit
     amend = commit --amend # ammend your last commit
     ammend = commit --amend # ammend your last commit
