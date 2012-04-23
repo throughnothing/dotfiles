@@ -29,8 +29,8 @@ set -o vi
 
 export ANT_HOME=/usr/local/ant
 export PATH="/usr/local/bin:/usr/local/sbin/:$PATH:$HOME/.scripts/:/var/lib/gems/1.8/bin/"
-export EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
-export SVN_EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
+export EDITOR="mvim -v"
+export SVN_EDITOR="mvim -v"
 export JAVA_HOME="/usr/lib/jvm/java-6-sun/"
 
 # Vi moed binding, remap C-c to C-x and make C-c exit insert mode

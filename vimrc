@@ -150,6 +150,7 @@ nmap <Leader>gc :Gcommit<CR>
 map <Leader>gh :Gbrowse<CR>
 " Gist Stuff
 let g:gist_show_privates = 1
+let g:gist_get_multiplefile = 1
 " Clear entire buffer
 nmap <Leader>db ggVGd
 
