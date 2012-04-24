@@ -39,3 +39,5 @@ Thumbs.db
 *.DS_Store
 *.git
 *.pid
+
+*.lock

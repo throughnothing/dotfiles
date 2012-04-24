@@ -2,6 +2,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+export APP_NOTES_AUTOSYNC=0
 NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
 # don't put duplicate lines in the history. See bash(1) for more options
 HISTCONTROL=ignoredups:ignorespace

@@ -84,3 +84,5 @@ alias ip='~/Projects/instapaper/lwp.pl'
 alias ddg='duckduckgo'
 
 alias pubip="curl -s http://checkip.dyndns.org/ | grep -o \"[[:digit:].]\+\""
+
+alias n='notes'
