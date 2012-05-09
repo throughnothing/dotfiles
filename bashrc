@@ -2,6 +2,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+export NOPASTE_SERVICES=Dancebin
 export APP_NOTES_AUTOSYNC=0
 NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
 # don't put duplicate lines in the history. See bash(1) for more options
@@ -139,3 +140,6 @@ opullreq() {
 #Bash Prompt
 PS1="\[\e[0;32m\][\u@\w]\[\e[m\]\n\[\e[1;34m\][\h]\[\e[m\]\[\e[0;33m\]\$(parse_git_branch)\$(num_git_commits_ahead)\[\e[m\] : "
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+# Line up bash prompt to first column every time
+# http://jonisalonen.com/2012/your-bash-prompt-needs-this/
+PS1="\[\033[G\]$PS1"
