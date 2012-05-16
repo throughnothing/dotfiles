@@ -90,7 +90,7 @@ dfu() {
 git_purge_local_branches() {
   [ -z $1 ] && return
   #git branch -d `git branch --merged $1 | grep -v '^*' | grep -v 'master' | grep -v 'dev' | tr -d '\n'`
-  BRANCHES=`git branch --merged $1 | grep -v '^*' | grep -v 'master' | grep -v 'dev' | tr -d '\n'`
+  BRANCHES=`git branch --merged $1 | grep -v '^*' | grep -v 'master' | grep -v 'dev' | grep -v "/$1$" | tr -d '\n'`
   echo "Running: git branch -d $BRANCHES"
   git branch -d $BRANCHES
 }
@@ -100,7 +100,7 @@ git_purge_remote_branches() {
   [ -z $1 ] && return
   git remote prune origin
 
-  BRANCHES=`git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
+  BRANCHES=`git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | grep -v "/$1$" | sed 's/origin\//:/g' | tr -d '\n'`
   echo "Running: git push origin $BRANCHES"
   git push origin $BRANCHES
 }
