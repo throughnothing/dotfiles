@@ -2,9 +2,13 @@ syntax on
 
 set background=dark
 colorscheme solarized
+if has("gui_running")
+    colorscheme wombat
+    set columns=170
+endif
 
 set lcs=tab:▹\ ,eol:¬,trail:·,extends:«,precedes:»
-set list!
+"set list!
 set hidden " for lustyjuggler/ explorer
 set guioptions=
 set laststatus=2
@@ -90,7 +94,7 @@ let g:ctrlp_open_multi = '10t'
 
 "Vim-script-runner
 let g:script_runner_map = "<Leader>sx"
-let g:script_runner_perl = "perl -Ilib -MData::Dump"
+let g:script_runner_perl = "perl -Ilib -MData::Dumper -Mv5.10 -MClass::Autouse=:superloader -Mwarnings -MFile::Slurp -MIO::All -MList::AllUtils=:all -Mutf8::all"
 let g:script_runner_javascript = "node"
 
 let mapleader = ","
@@ -112,6 +116,7 @@ let twitvim_browser_cmd="open"
 nmap <Leader><Leader>ds :%s/\s\+$//g<CR>
 nmap <Leader>yr :YRShow<CR>
 nmap <Leader>tf :FriendsTwitter<CR>
+nmap <Leader>tp :PosttoTwitter<CR>
 
 " Better paste defaults
 nmap p ]p
