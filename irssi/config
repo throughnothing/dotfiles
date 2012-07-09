@@ -14,13 +14,7 @@ servers = (
 );
 
 chatnets = {
-  fnode = {
-    type = "IRC";
-    max_msgs = "5";
-    max_whois = "4";
-    max_query_chans = "5";
-  };
-  gnome = { type = "IRC"; };
+  fnode = { type = "IRC"; };
   perl = { type = "IRC"; };
 };
 
