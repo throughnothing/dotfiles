@@ -30,7 +30,7 @@ fi
 set -o vi
 
 export ANT_HOME=/usr/local/ant
-export PATH="/usr/local/bin:/usr/local/sbin/:$PATH:$HOME/.scripts/:/var/lib/gems/1.8/bin/"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.scripts:/var/lib/gems/1.8/bin"
 export EDITOR="mvim -v"
 export SVN_EDITOR="mvim -v"
 export JAVA_HOME="/usr/lib/jvm/java-6-sun/"
@@ -117,8 +117,11 @@ pullreq() {
   HEAD=$(git symbolic-ref HEAD 2> /dev/null)
   [ -z $HEAD ] && return # Return if no head
   REMOTE=`cat .git/config | grep "remote \"origin\"" -A 2 | grep "url" | sed 's/.*:\([^\/]*\).*/\1/'`
+  CUR_BRANCH=${HEAD#refs/heads/}
+  MSG=`git log -n1 --pretty=%s`
+  git push origin $CUR_BRANCH
 
-  hub pull-request -b $BRANCH -h $REMOTE:${HEAD#refs/heads/} $1
+  hub pull-request -b $BRANCH -h $REMOTE:$CUR_BRANCH "$MSG" $1
 }
 
 opullreq() {

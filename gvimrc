@@ -1,2 +1,3 @@
+colorscheme vividchalk
 set lines=57
-set columns=123
+set columns=173

@@ -61,9 +61,10 @@ alias tmux='TERM=xterm-256color tmux'
 alias bzrd='bzr diff | vim -'
 
 #Vagrant
-alias vssh='go ct && vagrant ssh'
-alias vpsql="ssh -t -i ~/.ssh/vagrant vagrant@33.33.33.10 \"sudo su postgres -c 'psql crowdtilt'\""
+alias vssh='go ct && vagrant ssh srv1'
+alias vpsql="ssh -t -i ~/.ssh/vagrant vagrant@33.33.33.11 \"sudo su postgres -c 'psql crowdtilt'\""
 alias pdb="ssh -t database1 \"sudo su postgres -c 'psql crowdtilt'\""
+alias sdb="ssh -t staging-database1 \"sudo su postgres -c 'psql crowdtilt'\""
 
 #OVPC clear ssh keys
 alias vpc_clear_ssh="sed -i -e '/^172\.19\.0.*$/d' ~/.ssh/known_hosts"

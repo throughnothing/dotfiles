@@ -1,10 +1,11 @@
 syntax on
 
 set background=dark
-colorscheme solarized
-if has("gui_running")
-    colorscheme wombat
-    set columns=170
+colorscheme vibrantink
+if has('gui_running')
+    colorscheme vividchalk
+    set lines=57
+    set columns=173
 endif
 
 set lcs=tab:▹\ ,eol:¬,trail:·,extends:«,precedes:»
@@ -23,7 +24,7 @@ set softtabstop=4
 set bs=2
 set ruler
 "set foldmethod=marker
-set foldmethod=indent
+"set foldmethod=indent
 set foldlevel=0
 set foldnestmax=20
 set tags=tags;
@@ -37,9 +38,19 @@ set et
 set mouse -=a
 set textwidth=80
 try
-    set cc=+1
+    set cc=80 guibg=#592929
 catch
 endtry
+
+"Include $ in varibale names
+set iskeyword=@,48-57,_,192-255,#,$
+
+" Highlight trailing whitespace in vim on non empty lines, but not while typing in insert mode!
+highlight ExtraWhitespace ctermbg=red guibg=Brown
+au ColorScheme * highlight ExtraWhitespace guibg=red
+au BufEnter * match ExtraWhitespace /\S\zs\s\+$/
+au InsertEnter * match ExtraWhitespace /\S\zs\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhiteSpace /\S\zs\s\+$/
 
 " Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>="
@@ -109,6 +120,9 @@ inoremap jj <esc>
 " Heresy
 inoremap <C-i> <esc>I
 inoremap <C-a> <esc>
+
+" lets you do w!! to sudo write the file
+nnoremap <Leader>w! :w !sudo tee % >/dev/null<cr>
 
 " TwitVim
 let twitvim_browser_cmd="open"
