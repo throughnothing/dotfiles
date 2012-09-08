@@ -34,6 +34,7 @@ export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.scripts:/var/lib/gems/1
 export EDITOR="mvim -v"
 export SVN_EDITOR="mvim -v"
 export JAVA_HOME="/usr/lib/jvm/java-6-sun/"
+export GISTY_DIR="~/gists"
 
 # Vi moed binding, remap C-c to C-x and make C-c exit insert mode
 # http://stackoverflow.com/questions/3126453/bash-vi-mode-bind-c-c-to-escape-from-insert-mode
@@ -116,12 +117,16 @@ pullreq() {
   [ -z $BRANCH ] && BRANCH="dev"
   HEAD=$(git symbolic-ref HEAD 2> /dev/null)
   [ -z $HEAD ] && return # Return if no head
-  REMOTE=`cat .git/config | grep "remote \"origin\"" -A 2 | grep "url" | sed 's/.*:\([^\/]*\).*/\1/'`
+  # Try to find an upstream remote first
+  REMOTE=`cat .git/config | grep "remote \"upstream\"" -A 2 | grep "url" | sed 's/.*\/github.com\/\([^\/]*\).*/\1/'`
+  # If upstream remote wasn't found, use origin
+  [ -z $REMOTE ] && REMOTE=`cat .git/config | grep "remote \"origin\"" -A 2 | grep "url" | sed 's/.*:\([^\/]*\).*/\1/'`
+
   CUR_BRANCH=${HEAD#refs/heads/}
   MSG=`git log -n1 --pretty=%s`
   git push origin $CUR_BRANCH
 
-  hub pull-request -b $BRANCH -h $REMOTE:$CUR_BRANCH "$MSG" $1
+  hub pull-request -b $BRANCH -h $REMOTE:$CUR_BRANCH
 }
 
 opullreq() {
@@ -139,6 +144,9 @@ opullreq() {
 
 # Perlbrew stuff
 [[ -f ~/perl5/perlbrew/etc/bashrc ]] && . ~/perl5/perlbrew/etc/bashrc
+
+# CT Nopaste
+[[ -f ~/.ctpaste ]] && . ~/.ctpaste
 
 #Bash Prompt
 PS1="\[\e[0;32m\][\u@\w]\[\e[m\]\n\[\e[1;34m\][\h]\[\e[m\]\[\e[0;33m\]\$(parse_git_branch)\$(num_git_commits_ahead)\[\e[m\] : "

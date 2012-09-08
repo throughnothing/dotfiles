@@ -88,3 +88,6 @@ alias ddg='duckduckgo'
 alias pubip="curl -s http://checkip.dyndns.org/ | grep -o \"[[:digit:].]\+\""
 
 alias n='notes'
+
+alias nopastec='DANCEBIN_URL=https://paste.crowdtilt.com nopaste'
+alias yespastec='DANCEBIN_URL=https://paste.crowdtilt.com yespaste'

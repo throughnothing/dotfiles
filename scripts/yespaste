@@ -1,0 +1,25 @@
+#!/usr/bin/env perl
+use v5.10;
+use WWW::Mechanize;
+
+# Get BasicAuth Credentials from environment
+sub credentials { ($ENV{DANCEBIN_USER}, $ENV{DANCEBIN_PASS}) }
+# We take 1 command-line argument: the HASH/ID of the paste we want to get
+my $id = $ARGV[0] or die "Need an id/hash to get!";
+# Parse out the id/hash if its a full url or partial URL
+$id =~ s{^https?://[^/]+/([^/]+)/?.+$}{$1};
+$id =~ s{/.+$}{};
+
+# Make sure uri ends with a '/'
+my $uri = ($ENV{DANCEBIN_URL} || 'http://danceb.in/') =~ s/([^\/])$/$1\//r;
+# Don't follow any redirects
+my $m = WWW::Mechanize->new( requests_redirectable => [] );
+# Authenticate if needed
+$m->credentials( credentials) if credentials;
+
+# Get the raw content of the dancebin paste
+my $res = $m->get( "$uri$id/raw" );
+die "Error getting paste!" unless $res->is_success && !$res->is_redirect;
+
+say $res->content;
+
