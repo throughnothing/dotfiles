@@ -33,7 +33,7 @@ export ANT_HOME=/usr/local/ant
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.scripts:/var/lib/gems/1.8/bin"
 export EDITOR="mvim -v"
 export SVN_EDITOR="mvim -v"
-export JAVA_HOME="/usr/lib/jvm/java-6-sun/"
+export JAVA_HOME=$(/usr/libexec/java_home)
 export GISTY_DIR="~/gists"
 
 # Vi moed binding, remap C-c to C-x and make C-c exit insert mode
@@ -131,6 +131,10 @@ pullreq() {
 
 opullreq() {
     open $(BRANCH=$BRANCH pullreq $1)
+}
+
+sshc() {
+    ssh -t bastion1 "ssh -t $1";
 }
 
 ## Git bash completion

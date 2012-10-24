@@ -11,6 +11,9 @@ endif
 " Nasty alias stuff that naveed says i'll regret
 set shellcmdflag=-ic
 
+set incsearch
+
+set ic
 set relativenumber
 set lcs=tab:▹\ ,eol:¬,trail:·,extends:«,precedes:»
 set list!
@@ -65,6 +68,7 @@ autocmd FileType xml set foldlevel=100
 autocmd FileType mail execute "normal }O\<Esc>o"
 au BufRead,BufNewFile *.tal setfiletype html
 au BufRead,BufNewFile *.tt setfiletype html
+au BufRead,BufNewFile *.t setfiletype perl
 filetype plugin on
 filetype indent on
 filetype on
@@ -109,7 +113,7 @@ let g:ctrlp_open_multi = '10t'
 
 "Vim-script-runner
 let g:script_runner_map = "<Leader>sx"
-let g:script_runner_perl = "perl -Ilib -MData::Dumper -MData::Dump -Mv5.10 -MClass::Autouse=:superloader -Mwarnings -MFile::Slurp -MIO::All -MList::AllUtils=:all -Mutf8::all"
+let g:script_runner_perl = "perl -Ilib -Mojo -MData::Dumper -MData::Dump -Mv5.10 -MClass::Autouse=:superloader -Mwarnings -MFile::Slurp  -Mutf8::all"
 let g:script_runner_javascript = "node"
 
 let mapleader = ","
