@@ -1,0 +1,4 @@
+#!/bin/bash
+# This will runn ssh-agent, and add my current users identity to it
+eval `ssh-agent`
+ssh-add
