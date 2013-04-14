@@ -4,7 +4,7 @@
 
 export NOPASTE_SERVICES=Dancebin
 export APP_NOTES_AUTOSYNC=0
-NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
+export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules:/usr/local/share/npm/lib/node_modules
 # don't put duplicate lines in the history. See bash(1) for more options
 HISTCONTROL=ignoredups:ignorespace
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
@@ -30,7 +30,7 @@ fi
 set -o vi
 
 export ANT_HOME=/usr/local/ant
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.scripts:/var/lib/gems/1.8/bin"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.scripts:/var/lib/gems/1.8/bin:/usr/local/share/npm/bin/"
 export EDITOR="mvim -v"
 export SVN_EDITOR="mvim -v"
 export JAVA_HOME=$(/usr/libexec/java_home)
@@ -134,7 +134,7 @@ opullreq() {
 }
 
 sshc() {
-    ssh -t bastion1 "ssh -t $1";
+    ssh -t bastion1 "ssh -t $1 $2 $3";
 }
 
 ## Git bash completion

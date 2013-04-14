@@ -63,7 +63,7 @@ alias bzrd='bzr diff | vim -'
 #Vagrant
 alias vssh='go ct && vagrant ssh srv1'
 alias vpsql="ssh -t -i ~/.ssh/vagrant vagrant@33.33.33.11 \"sudo su postgres -c 'psql crowdtilt'\""
-alias pdb="ssh -t bastion1 \"ssh -t database1a \"sudo su postgres -c 'psql crowdtilt'\"\""
+alias pdb="sshc database1a \"sudo su postgres -c 'psql crowdtilt'\""
 
 #OVPC clear ssh keys
 alias vpc_clear_ssh="sed -i -e '/^172\.19\.0.*$/d' ~/.ssh/known_hosts"
@@ -90,3 +90,5 @@ alias n='notes'
 
 alias nopastec='DANCEBIN_URL=https://paste.crowdtilt.com nopaste'
 alias yespastec='DANCEBIN_URL=https://paste.crowdtilt.com yespaste'
+
+alias dzb='dzil clean && dzil build --no-tgz';
