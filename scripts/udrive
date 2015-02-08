@@ -1,2 +1,0 @@
-#!/bin/bash
-sshfs root@router:/mnt/sda1 /media/UDrive/

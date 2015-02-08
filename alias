@@ -48,29 +48,9 @@ alias gdv="git diff | vim -"
 
 if [ `command -v mvim` ]; then
     alias vim="mvim -v"
-    alias gdsmv="git diff | mvim -"
-    alias gdmv="git diff | mvim -"
 fi
 
-alias gca='gclcli agenda'
-alias pyserve='python -m SimpleHTTPServer'
-
 alias tmux='TERM=xterm-256color tmux'
-
-#BZR
-alias bzrd='bzr diff | vim -'
-
-#Vagrant
-alias vssh='go ct && vagrant ssh srv1'
-alias vpsql="ssh -t -i ~/.ssh/vagrant vagrant@33.33.33.11 \"sudo su postgres -c 'psql crowdtilt'\""
-alias pdb="sshc database1a \"sudo su postgres -c 'psql crowdtilt'\""
-
-#OVPC clear ssh keys
-alias vpc_clear_ssh="sed -i -e '/^172\.19\.0.*$/d' ~/.ssh/known_hosts"
-alias vpc_get_novarc='scp root@172.19.0.3:novarc .'
-
-# OSX Postgres
-alias psql='/Library/PostgreSQL/9.1/bin/psql'
 
 #T todo list
 alias t='python ~/.scripts/t.py --task-dir ~/.todo --list todo --delete-if-empty'
@@ -78,17 +58,9 @@ alias t='python ~/.scripts/t.py --task-dir ~/.todo --list todo --delete-if-empty
 #go alias
 alias go='g'
 
-# Instapaper
-alias ip='~/Projects/instapaper/lwp.pl'
-
-#DuckDuckGo
-alias ddg='duckduckgo'
-
 alias pubip="curl -s http://checkip.dyndns.org/ | grep -o \"[[:digit:].]\+\""
 
 alias n='notes'
 
 alias nopastec='DANCEBIN_URL=https://paste.crowdtilt.com nopaste'
 alias yespastec='DANCEBIN_URL=https://paste.crowdtilt.com yespaste'
-
-alias dzb='dzil clean && dzil build --no-tgz';

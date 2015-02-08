@@ -2,9 +2,15 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# NOPASTE
 export NOPASTE_SERVICES=Dancebin
+# APP::NOTES
 export APP_NOTES_AUTOSYNC=0
+
+# PATHS
 export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules:/usr/local/share/npm/lib/node_modules
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.scripts:/var/lib/gems/1.8/bin:/usr/local/share/npm/bin/"
+
 # don't put duplicate lines in the history. See bash(1) for more options
 HISTCONTROL=ignoredups:ignorespace
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
@@ -30,11 +36,7 @@ fi
 set -o vi
 
 export ANT_HOME=/usr/local/ant
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.scripts:/var/lib/gems/1.8/bin:/usr/local/share/npm/bin/"
-export EDITOR="mvim -v"
-export SVN_EDITOR="mvim -v"
-export JAVA_HOME=$(/usr/libexec/java_home)
-export GISTY_DIR="~/gists"
+export EDITOR="vim"
 
 # Vi moed binding, remap C-c to C-x and make C-c exit insert mode
 # http://stackoverflow.com/questions/3126453/bash-vi-mode-bind-c-c-to-escape-from-insert-mode
@@ -148,9 +150,6 @@ sshc() {
 
 # Perlbrew stuff
 [[ -f ~/perl5/perlbrew/etc/bashrc ]] && . ~/perl5/perlbrew/etc/bashrc
-
-# CT Nopaste
-[[ -f ~/.ctpaste ]] && . ~/.ctpaste
 
 #Bash Prompt
 PS1="\[\e[0;32m\][\u@\w]\[\e[m\]\n\[\e[1;34m\][\h]\[\e[m\]\[\e[0;33m\]\$(parse_git_branch)\$(num_git_commits_ahead)\[\e[m\] : "

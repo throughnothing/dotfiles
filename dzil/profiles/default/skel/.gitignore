@@ -1,7 +1,0 @@
-*~
-*.swp
-blib
-Makefile
-Makefile.old
-.build
-{{ $dist->name }}-*
