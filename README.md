@@ -18,7 +18,7 @@ I also have a gist, which can be used to automate the entire process:
 
 * https://gist.github.com/921139
 
-I host an up-to-date copy of this script at http://throughnothing.com/dfs, making it easy to install a new box with:
+I host an up-to-date copy of this script at http://throughnothing.com/dotfiles.sh, making it easy to install a new box with:
 
     curl throughnothing.com/dotfiles.sh | bash
     bash <(curl throughnothing.com/dotfiles.sh)
