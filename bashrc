@@ -76,19 +76,6 @@ g(){
     z $* || _go $*
 }
 
-
-dfc() {
-    pushd ~/.dotfiles >> /dev/null
-    git add . && git add -u . && git commit -m "automated update"
-    popd >> /dev/null
-}
-
-dfu() {
-    pushd ~/.dotfiles >> /dev/null
-    git stash && git pull && git stash pop
-    popd >> /dev/null
-}
-
 #Git ProTip - Delete all local branches that have been merged into HEAD
 git_purge_local_branches() {
   [ -z $1 ] && return
