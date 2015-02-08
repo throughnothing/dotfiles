@@ -115,29 +115,9 @@ git_purge() {
   git_purge_remote_branches $branch
 }
 
-pullreq() {
-  [ -z $BRANCH ] && BRANCH="dev"
-  HEAD=$(git symbolic-ref HEAD 2> /dev/null)
-  [ -z $HEAD ] && return # Return if no head
-  # Try to find an upstream remote first
-  REMOTE=`cat .git/config | grep "remote \"upstream\"" -A 2 | grep "url" | sed 's/.*\/github.com\/\([^\/]*\).*/\1/'`
-  # If upstream remote wasn't found, use origin
-  [ -z $REMOTE ] && REMOTE=`cat .git/config | grep "remote \"origin\"" -A 2 | grep "url" | sed 's/.*:\([^\/]*\).*/\1/'`
-
-  CUR_BRANCH=${HEAD#refs/heads/}
-  MSG=`git log -n1 --pretty=%s`
-  git push origin $CUR_BRANCH
-
-  hub pull-request -b $BRANCH -h $REMOTE:$CUR_BRANCH
-}
-
-opullreq() {
-    open $(BRANCH=$BRANCH pullreq $1)
-}
-
-sshc() {
-    ssh -t bastion1 "ssh -t $1 $2 $3";
-}
+#sshc() {
+    #ssh -t bastion1 "ssh -t $1 $2 $3";
+#}
 
 ## Git bash completion
 # Only if we have brew
