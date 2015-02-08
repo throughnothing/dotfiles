@@ -20,16 +20,16 @@ I also have a gist, which can be used to automate the entire process:
 
 I host an up-to-date copy of this script at http://throughnothing.com/dfs, making it easy to install a new box with:
 
-    curl throughnothing.com/dfs | bash
-    bash <(curl throughnothing.com/dfs)
+    curl throughnothing.com/dotfiles.sh | bash
+    bash <(curl throughnothing.com/dotfiles.sh)
 
 To use with a specific branch:
 
-    curl throughnothing.com/dfs.sh | bash -s BRANCH 
-    bash <(curl throughnothing.com/dfs) BRANCH
+    curl throughnothing.com/dotfiles.sh | bash -s BRANCH 
+    bash <(curl throughnothing.com/dotfiles.sh) BRANCH
 
 To use with a shallow clone:
 
-    curl throughnothing.com/dfs.sh | bash -s BRANCH 1
-    bash <(curl throughnothing.com/dfs) BRANCH 1
+    curl throughnothing.com/dotfiles.sh | bash -s BRANCH 1
+    bash <(curl throughnothing.com/dotfiles.sh) BRANCH 1
     
