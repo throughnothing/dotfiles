@@ -14,9 +14,9 @@ set shellcmdflag=-ic
 set incsearch
 
 set ic
-set relativenumber
-set lcs=tab:▹\ ,eol:¬,trail:·,extends:«,precedes:»
-set list!
+"set relativenumber
+"set lcs=tab:▹\ ,eol:¬,trail:·,extends:«,precedes:»
+"set list!
 set hidden " for lustyjuggler/ explorer
 set guioptions=
 set laststatus=2
