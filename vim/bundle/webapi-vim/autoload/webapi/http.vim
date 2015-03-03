@@ -7,6 +7,8 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
+let s:system = function(get(g:, 'webapi#system_function', 'system'))
+
 function! s:nr2byte(nr)
   if a:nr < 0x80
     return nr2char(a:nr)
@@ -44,14 +46,17 @@ function! s:nr2hex(nr)
   return r
 endfunction
 
-function! s:urlencode_char(c)
-  let utf = iconv(a:c, &encoding, "utf-8")
-  if utf == ""
-    let utf = a:c
+function! s:urlencode_char(c, ...)
+  let is_binary = get(a:000, 1)
+  if !is_binary
+    let c = iconv(a:c, &encoding, "utf-8")
+    if c == ""
+      let c = a:c
+    endif
   endif
   let s = ""
-  for i in range(strlen(utf))
-    let s .= printf("%%%02X", char2nr(utf[i]))
+  for i in range(strlen(c))
+    let s .= printf("%%%02X", char2nr(c[i]))
   endfor
   return s
 endfunction
@@ -67,7 +72,8 @@ function! webapi#http#escape(str)
   return substitute(a:str, '[^a-zA-Z0-9_.~/-]', '\=s:urlencode_char(submatch(0))', 'g')
 endfunction
 
-function! webapi#http#encodeURI(items)
+function! webapi#http#encodeURI(items, ...)
+  let is_binary = get(a:000, 1)
   let ret = ''
   if type(a:items) == 4
     for key in sort(keys(a:items))
@@ -80,7 +86,7 @@ function! webapi#http#encodeURI(items)
       let ret .= item
     endfor
   else
-    let ret = substitute(a:items, '[^a-zA-Z0-9_.~-]', '\=s:urlencode_char(submatch(0))', 'g')
+    let ret = substitute(a:items, '[^a-zA-Z0-9_.~-]', '\=s:urlencode_char(submatch(0), is_binary)', 'g')
   endif
   return ret
 endfunction
@@ -119,54 +125,73 @@ endfunction
 function! webapi#http#get(url, ...)
   let getdata = a:0 > 0 ? a:000[0] : {}
   let headdata = a:0 > 1 ? a:000[1] : {}
+  let follow = a:0 > 2 ? a:000[2] : 1
   let url = a:url
   let getdatastr = webapi#http#encodeURI(getdata)
   if strlen(getdatastr)
     let url .= "?" . getdatastr
   endif
   if executable('curl')
-    let command = 'curl -L -s -k -i '
+    let command = printf('curl %s -s -k -i', follow ? '-L' : '')
     let quote = &shellxquote == '"' ?  "'" : '"'
     for key in keys(headdata)
       if has('win32')
         let command .= " -H " . quote . key . ": " . substitute(headdata[key], '"', '"""', 'g') . quote
       else
         let command .= " -H " . quote . key . ": " . headdata[key] . quote
-	  endif
+      endif
     endfor
     let command .= " ".quote.url.quote
-    let res = system(command)
+    let res = s:system(command)
   elseif executable('wget')
-    let command = 'wget -O- --save-headers --server-response -q -L '
+    let command = printf('wget -O- --save-headers --server-response -q %s', follow ? '-L' : '')
     let quote = &shellxquote == '"' ?  "'" : '"'
     for key in keys(headdata)
       if has('win32')
         let command .= " --header=" . quote . key . ": " . substitute(headdata[key], '"', '"""', 'g') . quote
       else
         let command .= " --header=" . quote . key . ": " . headdata[key] . quote
-	  endif
+      endif
     endfor
     let command .= " ".quote.url.quote
-    let res = system(command)
+    let res = s:system(command)
+  else
+    throw "require `curl` or `wget` command"
   endif
-  while res =~ '^HTTP/1.\d 3' || res =~ '^HTTP/1\.\d 200 Connection established' || res =~ '^HTTP/1\.\d 100 Continue'
-    let pos = stridx(res, "\r\n\r\n")
-    if pos != -1
-      let res = res[pos+4:]
-    else
-      let pos = stridx(res, "\n\n")
-      let res = res[pos+2:]
-    endif
-  endwhile
+  if follow != 0
+    while res =~ '^HTTP/1.\d 3' || res =~ '^HTTP/1\.\d 200 Connection established' || res =~ '^HTTP/1\.\d 100 Continue'
+      let pos = stridx(res, "\r\n\r\n")
+      if pos != -1
+        let res = strpart(res, pos+4)
+      else
+        let pos = stridx(res, "\n\n")
+        let res = strpart(res, pos+2)
+      endif
+    endwhile
+  endif
   let pos = stridx(res, "\r\n\r\n")
   if pos != -1
-    let content = res[pos+4:]
+    let content = strpart(res, pos+4)
   else
     let pos = stridx(res, "\n\n")
-    let content = res[pos+2:]
+    let content = strpart(res, pos+2)
+  endif
+  let header = split(res[:pos-1], '\r\?\n')
+  let matched = matchlist(get(header, 0), '^HTTP/1\.\d\s\+\(\d\+\)\s\+\(.*\)')
+  if !empty(matched)
+    let [status, message] = matched[1 : 2]
+    call remove(header, 0)
+  else
+    if v:shell_error || len(matched)
+      let [status, message] = ['500', "Couldn't connect to host"]
+    else
+      let [status, message] = ['200', 'OK']
+    endif
   endif
   return {
-  \ "header" : split(res[0:pos], '\r\?\n'),
+  \ "status" : status,
+  \ "message" : message,
+  \ "header" : header,
   \ "content" : content
   \}
 endfunction
@@ -175,28 +200,29 @@ function! webapi#http#post(url, ...)
   let postdata = a:0 > 0 ? a:000[0] : {}
   let headdata = a:0 > 1 ? a:000[1] : {}
   let method = a:0 > 2 ? a:000[2] : "POST"
+  let follow = a:0 > 3 ? a:000[3] : 1
   let url = a:url
   if type(postdata) == 4
     let postdatastr = webapi#http#encodeURI(postdata)
   else
     let postdatastr = postdata
   endif
+  let file = tempname()
   if executable('curl')
-    let command = 'curl -L -s -k -i -X '.method
+    let command = printf('curl %s -s -k -i -X %s', (follow ? '-L' : ''), len(method) ? method : 'POST')
     let quote = &shellxquote == '"' ?  "'" : '"'
     for key in keys(headdata)
       if has('win32')
         let command .= " -H " . quote . key . ": " . substitute(headdata[key], '"', '"""', 'g') . quote
       else
         let command .= " -H " . quote . key . ": " . headdata[key] . quote
-	  endif
+      endif
     endfor
     let command .= " ".quote.url.quote
-    let file = tempname()
     call writefile(split(postdatastr, "\n"), file, "b")
-    let res = system(command . " --data-binary @" . quote.file.quote)
+    let res = s:system(command . " --data-binary @" . quote.file.quote)
   elseif executable('wget')
-    let command = 'wget -O- --save-headers --server-response -q -L '
+    let command = printf('wget -O- --save-headers --server-response -q %s', follow ? '-L' : '')
     let headdata['X-HTTP-Method-Override'] = method
     let quote = &shellxquote == '"' ?  "'" : '"'
     for key in keys(headdata)
@@ -204,32 +230,49 @@ function! webapi#http#post(url, ...)
         let command .= " --header=" . quote . key . ": " . substitute(headdata[key], '"', '"""', 'g') . quote
       else
         let command .= " --header=" . quote . key . ": " . headdata[key] . quote
-	  endif
+      endif
     endfor
     let command .= " ".quote.url.quote
-    let file = tempname()
     call writefile(split(postdatastr, "\n"), file, "b")
-    let res = system(command . " --post-data @" . quote.file.quote)
+    let res = s:system(command . " --post-data @" . quote.file.quote)
+  else
+    throw "require `curl` or `wget` command"
   endif
   call delete(file)
-  while res =~ '^HTTP/1.\d 3' || res =~ '^HTTP/1\.\d 200 Connection established' || res =~ '^HTTP/1\.\d 100 Continue'
-    let pos = stridx(res, "\r\n\r\n")
-    if pos != -1
-      let res = res[pos+4:]
-    else
-      let pos = stridx(res, "\n\n")
-      let res = res[pos+2:]
-    endif
-  endwhile
+  if follow != 0
+    while res =~ '^HTTP/1.\d 3' || res =~ '^HTTP/1\.\d 200 Connection established' || res =~ '^HTTP/1\.\d 100 Continue'
+      let pos = stridx(res, "\r\n\r\n")
+      if pos != -1
+        let res = strpart(res, pos+4)
+      else
+        let pos = stridx(res, "\n\n")
+        let res = strpart(res, pos+2)
+      endif
+    endwhile
+  endif
   let pos = stridx(res, "\r\n\r\n")
   if pos != -1
-    let content = res[pos+4:]
+    let content = strpart(res, pos+4)
   else
     let pos = stridx(res, "\n\n")
-    let content = res[pos+2:]
+    let content = strpart(res, pos+2)
+  endif
+  let header = split(res[:pos-1], '\r\?\n')
+  let matched = matchlist(get(header, 0), '^HTTP/1\.\d\s\+\(\d\+\)\s\+\(.*\)')
+  if !empty(matched)
+    let [status, message] = matched[1 : 2]
+    call remove(header, 0)
+  else
+    if v:shell_error || len(matched)
+      let [status, message] = ['500', "Couldn't connect to host"]
+    else
+      let [status, message] = ['200', 'OK']
+    endif
   endif
   return {
-  \ "header" : split(res[0:pos], '\r\?\n'),
+  \ "status" : status,
+  \ "message" : message,
+  \ "header" : header,
   \ "content" : content
   \}
 endfunction

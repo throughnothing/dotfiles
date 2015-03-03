@@ -8,6 +8,8 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
+let s:system = function(get(g:, 'webapi#system_function', 'system'))
+
 function! webapi#xmlrpc#nil()
   return 0
 endfunction
@@ -20,35 +22,56 @@ function! webapi#xmlrpc#false()
   return 0
 endfunction
 
+function! s:get_childNode(node)
+  let child = a:node.childNode('value').childNode()
+  if empty(child)
+    let child = a:node.childNode('value')
+  endif
+  return child
+endfunction
+
 function! s:from_value(value)
   let value = a:value
   if value.name == 'methodResponse'
     let param = value.childNode('params').childNodes('param')
     if len(param) == 1
-      return s:from_value(param[0].childNode('value').childNode())
+      return s:from_value(s:get_childNode(param[0]))
     else
       let ret = []
       for v in param
-        call add(ret, s:from_value(v.childNode('value').childNode()))
+        call add(ret, s:from_value(s:get_childNode(v)))
       endfor
       return ret
     endif
   elseif value.name == 'string'
     return value.value()
+  elseif value.name == 'base64'
+    return value.value()
+  elseif value.name == 'dateTime.iso8601'
+    return value.value()
+  elseif value.name == 'boolean'
+    return 0+substitute(value.value(), "[ \n\r]", '', 'g')
   elseif value.name == 'int'
+    return 0+substitute(value.value(), "[ \n\r]", '', 'g')
+  elseif value.name == 'i4'
     return 0+substitute(value.value(), "[ \n\r]", '', 'g')
   elseif value.name == 'double'
     return str2float(substitute(value.value(), "[ \n\r]", '', 'g'))
   elseif value.name == 'struct'
     let ret = {}
     for member in value.childNodes('member')
-      let ret[member.childNode('name').value()] = s:from_value(member.childNode('value').childNode())
+      let ret[member.childNode('name').value()] = s:from_value(s:get_childNode(member))
     endfor
     return ret
   elseif value.name == 'array'
     let ret = []
     for v in value.childNode('data').childNodes('value')
-      call add(ret, s:from_value(v.childNode()))
+      let child = v.childNode()
+      if !empty(child)
+        call add(ret, s:from_value(child))
+      else
+        call add(ret, v.value())
+      endif
     endfor
     return ret
   elseif value.name == 'nil'
@@ -56,6 +79,8 @@ function! s:from_value(value)
       return function('webapi#xmlrpc#nil')
     endif
     return 0
+  elseif value.name == 'value'
+    return value.value()
   else
     throw "unknown type: ".value.name
   endif
@@ -88,7 +113,7 @@ function! s:to_value(content)
         call base64.value(a:content["bits"])
       elseif has_key(a:content, "path")
         let quote = &shellxquote == '"' ?  "'" : '"'
-        let bits = substitute(system("xxd -ps ".quote.a:content["path"].quote), "[ \n\r]", '', 'g')
+        let bits = substitute(s:system("xxd -ps ".quote.a:content["path"].quote), "[ \n\r]", '', 'g')
         call base64.value(webapi#base64#b64encodebin(bits))
       endif
       return struct
@@ -160,11 +185,11 @@ function! s:to_fault(dom)
   return faultCode.":".faultString
 endfunction
 
-function! webapi#xmlrpc#call(uri, func, args)
-  let methodCall = webapi#xml#createElement("methodCall")
-  let methodName = webapi#xml#createElement("methodName")
-  call methodName.value(a:func)
-  call add(methodCall.child, methodName)
+"add_node_params
+"Add list of args on the xml tree.
+"input: list of args
+"output: none
+function! s:add_node_params(args)
   let params = webapi#xml#createElement("params")
   for Arg in a:args
     let param = webapi#xml#createElement("param")
@@ -174,8 +199,19 @@ function! webapi#xmlrpc#call(uri, func, args)
     call add(params.child, param)
     unlet Arg
   endfor
-  call add(methodCall.child, params)
-  let xml = iconv(methodCall.toString(), &encoding, "utf-8")
+  return params
+endfunction
+
+function! webapi#xmlrpc#call(uri, func, args)
+  let methodCall = webapi#xml#createElement("methodCall")
+  let methodName = webapi#xml#createElement("methodName")
+  call methodName.value(a:func)
+  call add(methodCall.child, methodName)
+  if !empty(a:args)
+    call add(methodCall.child, s:add_node_params(a:args))
+  endif
+  let xml = '<?xml version="1.0" encoding="utf-8"?>'
+  let xml .= iconv(methodCall.toString(), &encoding, "utf-8")
   let res = webapi#http#post(a:uri, xml, {"Content-Type": "text/xml"})
   let dom = webapi#xml#parse(res.content)
   if len(dom.find('fault'))
@@ -196,6 +232,7 @@ function! webapi#xmlrpc#wrap(contexts)
           let target[ns] = {".uri": context.uri}
         endif
         let target = target[ns]
+        let api['.uri'] = target['.uri']
       endfor
     endif
     if len(context.argnames) && context.argnames[-1] == '...'

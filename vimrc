@@ -4,8 +4,8 @@ set background=dark
 colorscheme vibrantink
 if has('gui_running')
     colorscheme vividchalk
-    set lines=57
-    set columns=173
+    set lines=54
+    set columns=100
 endif
 
 " Nasty alias stuff that naveed says i'll regret
@@ -15,19 +15,19 @@ set incsearch
 
 set ic
 "set relativenumber
-"set lcs=tab:▹\ ,eol:¬,trail:·,extends:«,precedes:»
+set lcs=tab:▹\ ,eol:¬,trail:·,extends:«,precedes:»
 "set list!
 set hidden " for lustyjuggler/ explorer
 set guioptions=
 set laststatus=2
-set guifont=Menlo\ for\ Powerline
+set guifont=Monaco\ for\ Powerline
 set modeline
 set hls
 set ls=2
-set autoindent
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+"set autoindent
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set bs=2
 set ruler
 "set foldmethod=marker
@@ -43,14 +43,14 @@ set showcmd
 set splitbelow
 set et
 set mouse -=a
-set textwidth=80
+"set textwidth=80
 try
     set cc=80 guibg=#592929
 catch
 endtry
 
 "Include $ in varibale names
-set iskeyword=@,48-57,_,192-255,#,$
+"set iskeyword=@,48-57,_,192-255,#,$
 
 " Highlight trailing whitespace in vim on non empty lines, but not while typing in insert mode!
 highlight ExtraWhitespace ctermbg=red guibg=Brown
@@ -67,8 +67,11 @@ autocmd FileType xml set foldmethod=syntax
 autocmd FileType xml set foldlevel=100
 autocmd FileType mail execute "normal }O\<Esc>o"
 au BufRead,BufNewFile *.tal setfiletype html
+au BufRead,BufNewFile *.tt2 setfiletype html
 au BufRead,BufNewFile *.tt setfiletype html
+au BufRead,BufNewFile *.js.tt setfiletype javascript
 au BufRead,BufNewFile *.t setfiletype perl
+au BufRead,BufNewFile *.conf setfiletype conf
 filetype plugin on
 filetype indent on
 filetype on
@@ -81,7 +84,7 @@ au BufRead,BufNewFile Rexfile setfiletype perl
 
 autocmd BufRead *.mako set ft=html
 au BufRead,BufNewFile *.mako            setfiletype html
-call pathogen#runtime_append_all_bundles() 
+call pathogen#runtime_append_all_bundles()
 
 " Make :W work like :w
 ":cmap W w
@@ -93,8 +96,9 @@ let g:github_user = 'throughnothing'
 let g:neocomplcache_enable_at_startup = 1
 " Ctags
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-" Powerline
-let g:Powerline_symbols = 'fancy'
+nnoremap <Leader>ctr :!ctags -R lib<cr>
+" airline
+let g:airline_powerline_fonts = 1
 
 " CTRLP
 " Set Ctrl-P to show match at top of list instead of at bottom, which is so
@@ -120,12 +124,14 @@ let g:script_runner_map = "<Leader>sx"
 "let g:script_runner_perl = "perl -Ilib -Mojo -MData::Dumper -MData::Dump -Mv5.10 -MClass::Autouse=:superloader -Mwarnings -MFile::Slurp  -Mutf8::all"
 let g:script_runner_perl = "perl -Ilib -Mojo -MData::Dumper -MData::Dump -Mv5.10 -Mwarnings -MFile::Slurp  -Mutf8::all"
 let g:script_runner_javascript = "node"
+let g:script_runner_go = "go run"
 
 let mapleader = ","
 " Tell GPG to use ascii files for new files
 let g:GPGPreferArmor = 1
 let g:GPGUseAgent = 0
-"
+let g:GPGDefaultRecipients = [ '423D17F3' ]
+
 let g:syntastic_mode_map = { 'mode': 'passive',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': [] }
@@ -140,10 +146,25 @@ nnoremap <Leader>w! :w !sudo tee % >/dev/null<cr>
 " TwitVim
 let twitvim_browser_cmd="open"
 " Delete all trailing spaces from lines
-nmap <Leader><Leader>ds :%s/\s\+$//g<CR>
+"nmap <Leader><Leader>ds :%s/\s\+$//g<CR>
+" Better trim trailing whitespace
+nnoremap <Leader><Leader>ds :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
 nmap <Leader>yr :YRShow<CR>
 nmap <Leader>tf :FriendsTwitter<CR>
 nmap <Leader>tp :PosttoTwitter<CR>
+
+" Ack for word under cursor
+nnoremap <Leader>av :Ack!<cr>
+
+" delete a line, but only copy a whitespace-trimmed version to " register
+nnoremap <Leader>dd _yg_"_dd
+
+" In command line mode use ctrl-direction to move instead of arrow keys
+cnoremap <C-j> <t_kd>
+cnoremap <C-k> <t_ku>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 
 " Better paste defaults
 nmap p ]p
@@ -183,6 +204,8 @@ map <Leader>gh :Gbrowse<CR>
 " Gist Stuff
 let g:gist_show_privates = 1
 let g:gist_get_multiplefile = 1
+" use :Gist -P to post public
+let g:gist_post_private = 1
 " Clear entire buffer
 nmap <Leader>db ggVGd
 
@@ -234,3 +257,10 @@ augroup VimperatorYPentadactyl
     au! BufRead vimperator-*,pentadactyl-* nnoremap <buffer> ZZ :silent write \| :bd \| :macaction hide:<CR>
     au BufRead vimperator-*,pentadactyl-* imap <buffer> ZZ <Esc>ZZ
 augroup END
+
+
+" http://drawohara.com/post/6344279/crontab-temp-file-must-be-edited-in-place
+if $VIM_CRONTAB == "true"
+    set nobackup
+    set nowritebackup
+endif
