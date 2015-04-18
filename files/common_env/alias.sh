@@ -7,16 +7,13 @@ alias fchhh='fc -30 0'
 alias grep='grep --color=auto'
 alias ll='ls -l'
 alias lla='ls -la'
-alias ls='ls -G --color'
+alias ls='ls -G'
 alias dateymd='date +%Y-%m-%d'
 alias ctagsr='ctags -R'
 
 alias col1="awk '{print \$1}'"
 alias col2="awk '{print \$2}'"
 alias col3="awk '{print \$3}'"
-
-alias vigo='vim ~/.go'
-alias vimw='vim -c :VimwikiGoHome'
 
 alias psag="ps aux | grep"
 alias lssh='ps aux | grep ssh'
@@ -52,15 +49,7 @@ fi
 
 alias tmux='TERM=xterm-256color tmux'
 
-#T todo list
-alias t='python ~/.scripts/t.py --task-dir ~/.todo --list todo --delete-if-empty'
-
 #go alias
 alias go='g'
 
 alias pubip="curl -s http://checkip.dyndns.org/ | grep -o \"[[:digit:].]\+\""
-
-alias n='notes'
-
-alias nopastec='DANCEBIN_URL=https://paste.crowdtilt.com nopaste'
-alias yespastec='DANCEBIN_URL=https://paste.crowdtilt.com yespaste'

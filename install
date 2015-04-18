@@ -3,7 +3,7 @@ use strict;
 use Cwd;
 
 my $home = glob '~';
-foreach my $file_path (glob cwd().'/*'){
+foreach my $file_path (glob cwd().'/files/*'){
     my $file = (split '/', $file_path)[-1];
     if(!($file =~ /README|install*/)){
         my $to = "$home/.$file";

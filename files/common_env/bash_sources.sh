@@ -1,0 +1,21 @@
+source ~/.common_env/alias.sh
+source ~/.common_env/bash_exports.sh
+source ~/.common_env/bash_funcs.sh
+
+source ~/.scripts/z.sh
+
+## Github stuff if it exists
+[[ -f ~/.github ]] && source ~/.github
+
+# Perlbrew stuff
+[[ -f ~/perl5/perlbrew/etc/bashrc ]] && source ~/perl5/perlbrew/etc/bashrc
+
+# Load RVM functin
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
