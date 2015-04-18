@@ -49,8 +49,16 @@ function install_xcode() {
 if [[ "$OSTYPE" == "darwin"* ]]; then
     install_xcode
     # Install homebrew
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    if [[ ! -x `which brew` ]]; then
+      log "Installing Homebrew"
+      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    else
+      log "Homebrew already installed."
+    fi
     # Install brew-bundle https://github.com/Homebrew/homebrew-bundle
+    log "Installing Homebrew-Bundle + Apps"
     brew tap Homebrew/bundle
     brew bundle
 fi
+
+./install-symlinks
