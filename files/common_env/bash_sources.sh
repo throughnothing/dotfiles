@@ -1,8 +1,8 @@
-source ~/.common_env/alias.sh
+source ~/.scripts/z.sh
 source ~/.common_env/bash_exports.sh
 source ~/.common_env/bash_funcs.sh
+source ~/.common_env/alias.sh
 
-source ~/.scripts/z.sh
 
 ## Github stuff if it exists
 [[ -f ~/.github ]] && source ~/.github

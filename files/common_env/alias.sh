@@ -49,7 +49,4 @@ fi
 
 alias tmux='TERM=xterm-256color tmux'
 
-#go alias
-alias go='g'
-
 alias pubip="curl -s http://checkip.dyndns.org/ | grep -o \"[[:digit:].]\+\""
