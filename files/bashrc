@@ -33,3 +33,7 @@ PS1="\[\e[0;32m\][\u@\w]\[\e[m\]\[\e[0;33m\]\$(parse_git_branch)\$(num_git_commi
 # Line up bash prompt to first column every time
 # http://jonisalonen.com/2012/your-bash-prompt-needs-this/
 #PS1="\n[\033[G\]$PS1"
+# Better solution!
+# http://unix.stackexchange.com/questions/60459/how-to-make-bash-put-prompt-on-a-new-line-after-cat-command
+shopt -s promptvars
+PS1='$(printf "%$((COLUMNS-1))s\r")'$PS1
