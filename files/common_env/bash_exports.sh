@@ -15,3 +15,5 @@ export HISTCONTROL=ignoredups:ignorespace
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 export HISTSIZE=1000
 export HISTFILESIZE=2000
+
+export DOCKER_HOST=10.2.0.10:2375
