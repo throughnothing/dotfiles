@@ -1,3 +1,4 @@
+
 source ~/.scripts/z.sh
 source ~/.common_env/bash_exports.sh
 source ~/.common_env/bash_funcs.sh
@@ -9,6 +10,12 @@ source ~/.common_env/alias.sh
 
 # Perlbrew stuff
 [[ -f ~/perl5/perlbrew/etc/bashrc ]] && source ~/perl5/perlbrew/etc/bashrc
+
+# Load GPG Agent Exports
+[[ -s "$HOME/.gpg-agent-info" ]] && source "$HOME/.gpg-agent-info"
+
+# Load Sensitive
+[[ -s "$HOME/.common_env/sensitive.sh" ]] && source "$HOME/.common_env/sensitive.sh"
 
 # Load RVM functin
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
