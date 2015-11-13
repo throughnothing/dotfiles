@@ -50,3 +50,6 @@ fi
 alias tmux='TERM=xterm-256color tmux'
 
 alias pubip="curl -s http://checkip.dyndns.org/ | grep -o \"[[:digit:].]\+\""
+
+alias cal_unload="launchctl unload -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist"
+alias cal_load="launchctl load -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist"

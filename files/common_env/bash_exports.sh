@@ -1,5 +1,7 @@
 export EDITOR="vim"
 
+export GOPATH="/Users/throughnothing/Projects/go"
+
 # NOPASTE
 export NOPASTE_SERVICES=Dancebin
 # APP::NOTES
@@ -7,7 +9,7 @@ export APP_NOTES_AUTOSYNC=0
 
 # PATHS
 export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules:/usr/local/share/npm/lib/node_modules
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.scripts:/var/lib/gems/1.8/bin:/usr/local/share/npm/bin/"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.scripts:/var/lib/gems/1.8/bin:/usr/local/share/npm/bin"
 
 
 # don't put duplicate lines in the history. See bash(1) for more options
