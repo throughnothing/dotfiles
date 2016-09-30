@@ -18,7 +18,7 @@ source ~/.common_env/alias.sh
 [[ -s "$HOME/.common_env/sensitive.sh" ]] && source "$HOME/.common_env/sensitive.sh"
 
 # Load RVM functin
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 2>&1 > /dev/null
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

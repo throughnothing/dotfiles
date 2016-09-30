@@ -53,3 +53,10 @@ alias pubip="curl -s http://checkip.dyndns.org/ | grep -o \"[[:digit:].]\+\""
 
 alias cal_unload="launchctl unload -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist"
 alias cal_load="launchctl load -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist"
+
+
+alias openvpn='sudo /Applications/Tunnelblick.app/Contents/Resources/openvpn/default'
+
+# Android ADB
+alias adb='/Users/throughnothing/Library/Android/sdk/platform-tools/adb'
+

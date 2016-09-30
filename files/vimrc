@@ -43,9 +43,9 @@ set showcmd
 set splitbelow
 set et
 set mouse -=a
-"set textwidth=80
+set textwidth=80
 try
-    set cc=80 guibg=#592929
+  set cc=80 guibg=#592929
 catch
 endtry
 
@@ -72,6 +72,7 @@ au BufRead,BufNewFile *.tt setfiletype html
 au BufRead,BufNewFile *.js.tt setfiletype javascript
 au BufRead,BufNewFile *.t setfiletype perl
 au BufRead,BufNewFile *.conf setfiletype conf
+au BufRead,BufNewFile *.hs setfiletype haskell
 filetype plugin on
 filetype indent on
 filetype on
@@ -82,7 +83,8 @@ au BufRead,BufNewFile *.vala            setfiletype vala
 au BufRead,BufNewFile *.vapi            setfiletype vala
 au BufRead,BufNewFile Rexfile setfiletype perl
 
-autocmd BufRead *.mako set ft=html
+autocmd BufRead,BufNewFile *.purs set ft=purescript
+autocmd BufRead,BufNewFile *.mako set ft=html
 au BufRead,BufNewFile *.mako            setfiletype html
 call pathogen#runtime_append_all_bundles()
 
@@ -125,6 +127,8 @@ let g:script_runner_map = "<Leader>sx"
 let g:script_runner_perl = "perl -Ilib -Mojo -MData::Dumper -MData::Dump -Mv5.10 -Mwarnings -MFile::Slurp  -Mutf8::all"
 let g:script_runner_javascript = "node"
 let g:script_runner_go = "go run"
+let g:script_runner_clojure = "lein exec"
+let g:script_runner_haskell = "ghci"
 
 let mapleader = ","
 " Tell GPG to use ascii files for new files
