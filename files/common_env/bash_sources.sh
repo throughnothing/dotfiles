@@ -20,7 +20,7 @@ source ~/.common_env/alias.sh
 export NVM_DIR=$HOME/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
- Load RVM functin
+# Load RVM functin
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 2>&1 > /dev/null
 
 # enable programmable completion features (you don't need to enable
