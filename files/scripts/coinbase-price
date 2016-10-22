@@ -1,4 +1,0 @@
-#!/usr/bin/env perl
-use v5.10; use ojo;
-say g('https://coinbase.com/api/v1/prices/buy')->json->{subtotal}{amount};
-

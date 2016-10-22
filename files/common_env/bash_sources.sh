@@ -6,10 +6,10 @@ source ~/.common_env/alias.sh
 
 
 ## Github stuff if it exists
-[[ -f ~/.github ]] && source ~/.github
+#[[ -f ~/.github ]] && source ~/.github
 
 # Perlbrew stuff
-[[ -f ~/perl5/perlbrew/etc/bashrc ]] && source ~/perl5/perlbrew/etc/bashrc
+#[[ -f ~/perl5/perlbrew/etc/bashrc ]] && source ~/perl5/perlbrew/etc/bashrc
 
 # Load GPG Agent Exports
 [[ -s "$HOME/.gpg-agent-info" ]] && source "$HOME/.gpg-agent-info"
@@ -17,7 +17,10 @@ source ~/.common_env/alias.sh
 # Load Sensitive
 [[ -s "$HOME/.common_env/sensitive.sh" ]] && source "$HOME/.common_env/sensitive.sh"
 
-# Load RVM functin
+export NVM_DIR=$HOME/.nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+ Load RVM functin
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 2>&1 > /dev/null
 
 # enable programmable completion features (you don't need to enable

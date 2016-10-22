@@ -1,8 +1,0 @@
-#!/usr/bin/env perl
-# parks - spark clone in perl (https://github.com/holman/spark)
-# Alternatives: https://github.com/holman/spark/wiki/Alternative-Implementations
-# Wicked Cool Examples: https://github.com/holman/spark/wiki/Wicked-Cool-Usage
-
-use List::Util qw( min max ); local $/;
-my ($t, @n) = ( [qw(▁ ▂ ▃ ▄ ▅ ▆ ▇ █)], -t STDIN ? @ARGV : split ' ', <STDIN> );
-print map($t->[ int( ( $_ - min(@n) ) / max(@n) * $#$t ) ], @n), "\n";
