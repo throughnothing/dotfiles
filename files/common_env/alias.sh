@@ -60,3 +60,6 @@ alias openvpn='sudo /Applications/Tunnelblick.app/Contents/Resources/openvpn/def
 # Android ADB
 alias adb='/Users/throughnothing/Library/Android/sdk/platform-tools/adb'
 
+alias vsc='open -a "Visual Studio Code"'
+alias vsc.='open -a "Visual Studio Code" .'
+
