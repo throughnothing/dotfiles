@@ -54,12 +54,10 @@ alias pubip="curl -s http://checkip.dyndns.org/ | grep -o \"[[:digit:].]\+\""
 alias cal_unload="launchctl unload -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist"
 alias cal_load="launchctl load -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist"
 
-
 alias openvpn='sudo /Applications/Tunnelblick.app/Contents/Resources/openvpn/default'
-
-# Android ADB
-alias adb='/Users/throughnothing/Library/Android/sdk/platform-tools/adb'
 
 alias vsc='open -a "Visual Studio Code"'
 alias vsc.='open -a "Visual Studio Code" .'
+
+alias open_files='lsof | awk '\''{ print $2 " " $1; }'\'' | sort -rn | uniq -c | sort -rn | head -20'
 
