@@ -7,6 +7,9 @@ tap 'homebrew/core'
 tap 'homebrew/bundle'
 tap 'homebrew/services'
 
+# https://github.com/DomT4/homebrew-autoupdate
+tap 'domt4/autoupdate'
+
 # Unsure of this
 # cask_args appdir: "~/Applications"
 
