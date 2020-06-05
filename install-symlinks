@@ -3,19 +3,6 @@ use strict;
 use Cwd;
 use File::Find qw(find);
 
-my $pgp_url = "https://willwolf.me/williamwolf.asc";
-
-sub import_gpg {
-    my $reval = system "which gpg2 >> /dev/null";
-    if ($reval == 0) {
-        print "Importing personal gpg key...\n";
-        my $reval = system "curl -sSL $pgp_url | gpg --import -";
-        $reval != 0 ? print "! Failed to import pgp key!\n" : ""
-    } else {
-        print "! gpg2 command not found. Not importing key.\n";
-    }
-}
-
 sub to_path {
     my ($home, $files_dir, $path) = @_;
     $path =~ s/$files_dir/$home\//;
@@ -44,9 +31,6 @@ sub main () {
         }
         symlink($file, $to); 
     }
-
-    # Import your personal gpg key
-    import_gpg();
 }
 
 main();
