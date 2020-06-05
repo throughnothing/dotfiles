@@ -16,4 +16,4 @@ This will create symlinks in ~/. to the files in the git repo.  It will also rem
 
 I host an up-to-date copy of this script at http://willwolf.me/mac-setup.sh, making it easy to install a new box with:
 
-    curl https://willwolf.me/mac-setup.sh | bash
+    bash <(curl https://willwolf.me/mac-setup.sh)

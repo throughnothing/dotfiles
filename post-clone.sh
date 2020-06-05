@@ -1,4 +1,5 @@
 #!/bin/bash
+
 INSTALLDIR=${INSTALLDIR:-~/.dotfiles}
 PRIVATE_INSTALLDIR=${PRIVATE_INSTALLDIR:-~/.dotfiles-private}
 PRIVATE_GIT_URL=${PRIVATE_GIT_URL:-keybase://private/throughnothing/dotfiles-private}
@@ -94,6 +95,8 @@ function main {
   has_cmd "gpg" _do_gpg
 
   popd >> /dev/null
+
+  echo "All Done!"
 }
 
-main;
+main
