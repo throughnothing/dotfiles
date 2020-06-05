@@ -7,6 +7,9 @@ PGP_KEY_URL=${PGP_KEY_URL:-https://willwolf.me/williamwolf.asc}
 
 # question_string, function_to_run
 function ask {
+  # Discard Any keystrokes from a prior task
+  read -t 1 -n 10000 discard 
+
   read -p "$1 (y/n): " yesno
   if [ "$yesno" == "y" ] || [ "$yesno" == "Y" ]; then $2; fi
 }
@@ -29,6 +32,8 @@ function install_homebrew_packages {
   echo "Setting homebrew to autoupdate + upgrade every 24 hours..."
   brew autoupdate --start --upgrade
 
+  # Discard anything that was typed during the above
+  read -t 1 -n 10000 discard 
   read -p "Done. You should now setup Keybase, 1Password, GPG, etc." empty
 }
 
