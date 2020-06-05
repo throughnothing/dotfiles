@@ -2,3 +2,4 @@
 *.netrwhist
 /vim/session
 *sensitive*
+.DS_Store

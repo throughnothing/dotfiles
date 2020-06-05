@@ -1,12 +1,37 @@
 #!/usr/bin/env perl
 use strict;
 use Cwd;
+use File::Find qw(find);
 
-my $home = glob '~';
-foreach my $file_path (glob cwd().'/files/*'){
-    my $file = (split '/', $file_path)[-1];
-    if(!($file =~ /README|install*/)){
-        my $to = "$home/.$file";
+my $pgp_url = "https://willwolf.me/williamwolf.asc";
+
+sub import_gpg {
+    my $reval = system "which gpg2 >> /dev/null";
+    if ($reval == 0) {
+        print "Importing personal gpg key...\n";
+        my $reval = system "curl -sSL $pgp_url | gpg --import -";
+        $reval != 0 ? print "! Failed to import pgp key!\n" : ""
+    } else {
+        print "! gpg2 command not found. Not importing key.\n";
+    }
+}
+
+sub to_path {
+    my ($home, $files_dir, $path) = @_;
+    $path =~ s/$files_dir/$home\//;
+    return $path;
+}
+
+sub main () {
+    my $home = glob '~';
+    my $files_dir = cwd() . '/files/';
+
+    my @files;
+    # Get all files, recursively
+    find({ wanted => sub { if (-f $File::Find::name) { push @files, $File::Find::name } } }, $files_dir);
+
+    foreach my $file (@files) {
+        my $to = to_path($home, $files_dir, $file);
         if(-e $to){
             print "! ($to) exists...";
             if(-l $to){
@@ -17,13 +42,12 @@ foreach my $file_path (glob cwd().'/files/*'){
                 print "as a normal file/directory, moved to $to~...\n"
             }
         }
-        symlink($file_path, $to); 
+        symlink($file, $to); 
     }
+
+    # Import your personal gpg key
+    import_gpg();
 }
 
-# Setup ~/.go if it doesn't exist, and make sure we have Projects
-system "touch \$HOME/.go";
-system "mkdir -p \$HOME/Projects \$HOME/.todo";
-# git push on commit
-system "echo 'git push' > .git/hooks/post-commit";
-system "chmod 755 .git/hooks/post-commit";
+main();
+

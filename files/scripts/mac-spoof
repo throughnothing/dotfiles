@@ -1,6 +1,0 @@
-#!/bin/bash
-#Disassociate from any wifi connections
-sudo airport -z
-
-NEW_MAC=`openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'`
-sudo ifconfig en1 ether $NEW_MAC

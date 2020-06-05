@@ -1,1 +1,0 @@
-hardstatus alwayslastline "%{= kK}%-w%{+b W}%n %t%{-}%+w%=%{+b W}%1`@%H"
