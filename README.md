@@ -2,9 +2,9 @@ throughnothing's dotfiles
 ===
 About
 ==
-These are my dotfiles.  These files will get my environment up and running the way i need it to be to get stuff done(tm).
+These are my dotfiles, but also a little bit more.  These files will get my environment up and running the way i need it to be to get stuff done(tm).
 
-In this repo, the files do not have the preceding '.' in their names.  The install script takes care of this.  It loops over every file except the install and README files, and symlinks them to ~/ with the preceding '.'.  This way i simple git pull (or 'dfu' to call the function in my bashrc) will update everything.
+For now, this is tailored to a Mac, and will help setup homebrew, my applications (via `brew`), etc.
 
 Use
 ==

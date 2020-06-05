@@ -1,6 +1,11 @@
 #!/usr/bin/env perl
+
+# This file is designed to have no external perl dependencies
+# It also uses perl because that is installed by default on most systems
+# and particularly on a mac.
+
 use strict;
-use Cwd;
+use Cwd qw(cwd);
 use File::Find qw(find);
 
 sub to_path {
@@ -9,7 +14,7 @@ sub to_path {
     return $path;
 }
 
-sub main () {
+sub main {
     my $home = glob '~';
     my $files_dir = cwd() . '/files/';
 
@@ -21,10 +26,10 @@ sub main () {
         my $to = to_path($home, $files_dir, $file);
         if(-e $to){
             print "! ($to) exists...";
-            if(-l $to){
+            if (-l $to) {
                 unlink($to);
                 print "as a symlink, removed\n";
-            }else{
+            } else {
                 rename $to => "$to~";
                 print "as a normal file/directory, moved to $to~...\n"
             }

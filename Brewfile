@@ -4,7 +4,6 @@ tap 'homebrew/cask-drivers'
 tap 'homebrew/cask-fonts'
 tap 'homebrew/cask-versions'
 tap 'homebrew/core'
-tap 'homebrew/dev-tools'
 tap 'homebrew/bundle'
 tap 'homebrew/services'
 

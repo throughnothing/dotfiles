@@ -1,4 +1,9 @@
 #!/bin/bash
+# This file is meant to be bare-bones, so that it has to be modified as little
+# as possible. It should have no deps, and just help get brew installed, and
+# dotfiles repository cloned.  From there, scripts inside the dotfiles repository
+# will take over.
+
 export INSTALLDIR=${INSTALLDIR:-~/.dotfiles}
 BRANCH=${BRANCH:-master}
 GIT_ARGS=${GIT_ARGS:---depth 1}
