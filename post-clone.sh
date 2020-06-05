@@ -23,16 +23,13 @@ function install_dotfiles_symlinks {
 }
 
 function install_homebrew_packages {
-  function _do {
-    echo "Installing from Brewfile..."
-    brew bundle
+  echo "Installing from Brewfile..."
+  brew bundle
 
-    echo "Setting homebrew to autoupdate + upgrade every 24 hours..."
-    brew autoupdate --start --upgrade
+  echo "Setting homebrew to autoupdate + upgrade every 24 hours..."
+  brew autoupdate --start --upgrade
 
-    read -p "Done. You should now setup Keybase, 1Password, GPG, etc." empty
-  }
-  ask "Would you like to install your Homebrew Packages?" _do
+  read -p "Done. You should now setup Keybase, 1Password, GPG, etc." empty
 }
 
 function import_gpg_key {
