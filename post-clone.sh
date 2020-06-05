@@ -56,21 +56,18 @@ function setup_private_dotfiles {
       echo "~/.dotfiles-private already exists!";
       _install_symlinks
     else
-      function _do {
-        echo "Setting up private dotfiles at $PRIVATE_INSTALLDIR..."
-        mkdir -p $PRIVATE_INSTALLDIR
-        pushd $PRIVATE_INSTALLDIR >> /dev/null
-        git clone $PRIVATE_GIT_URL .
-        popd >> /dev/null
+      echo "Setting up private dotfiles at $PRIVATE_INSTALLDIR..."
+      mkdir -p $PRIVATE_INSTALLDIR
+      pushd $PRIVATE_INSTALLDIR >> /dev/null
+      git clone $PRIVATE_GIT_URL .
+      popd >> /dev/null
 
-        _install_symlinks
-      }
-      ask "Would you like to setup private dotfiles? Note that you'll need to have keybase setup and configured first." \
-        _do
+      _install_symlinks
     fi
   }
 
-  ask "Wolud you like to setup private dotfiles?" _do
+  ask "Would you like to setup private dotfiles? Note that you'll need to have keybase setup and configured first." \
+    _do
 }
 
 function main {
