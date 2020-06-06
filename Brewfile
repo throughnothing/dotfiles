@@ -45,6 +45,9 @@ cask 'osxfuse'
 cask 'the-unarchiver'
 cask 'insomniaX'
 
+# Markdown Editor
+cask 'typora'
+
 # cask 'postman'
 # cask 'java'
 # cask 'github'
