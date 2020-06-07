@@ -26,6 +26,7 @@ brew 'haskell-stack'
 brew 'curl'
 brew 'tmate'
 brew 'wget'
+brew 'sbt'
 
 # mac apps
 cask 'keybase'
