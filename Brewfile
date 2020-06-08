@@ -45,7 +45,7 @@ cask 'gitter'
 cask 'riot'
 cask 'osxfuse'
 cask 'the-unarchiver'
-cask 'insomniaX'
+cask 'caffeine'
 
 # Markdown Editor
 cask 'typora'
