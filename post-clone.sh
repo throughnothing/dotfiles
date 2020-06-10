@@ -82,6 +82,10 @@ function main {
   which perl >> /dev/null
   if [ "$?" -eq "1" ]; then echo "Need Perl!"; exit 1; fi
 
+  echo -n "Installing git hooks..."
+  cp git-hooks/* .git/hooks/
+  echo "Done."
+
   ask "Would you like to install your dotfiles symlinks?" \
     install_dotfiles_symlinks
   ask "Would you like to install your Homebrew Packages?" \

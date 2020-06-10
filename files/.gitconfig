@@ -1,3 +1,5 @@
 [user]
         name = William Wolf
         email = throughnothing@users.noreply.github.com
+[hooks]
+	gitleaks = true
