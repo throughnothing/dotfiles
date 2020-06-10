@@ -4,6 +4,7 @@ INSTALLDIR=${INSTALLDIR:-~/.dotfiles}
 PRIVATE_INSTALLDIR=${PRIVATE_INSTALLDIR:-~/.dotfiles-private}
 PRIVATE_GIT_URL=${PRIVATE_GIT_URL:-keybase://private/throughnothing/dotfiles-private}
 PGP_KEY_URL=${PGP_KEY_URL:-https://willwolf.me/williamwolf.asc}
+PGP_KEY_URL_PC=${PGP_KEY_URL_PC:-https://willwolf.me/williamwolf-polychain.asc}
 
 # question_string, function_to_run
 function ask {
@@ -40,7 +41,10 @@ function install_homebrew_packages {
 function import_gpg_key {
   function _do {
     curl -sSL $PGP_KEY_URL | gpg --import -
-    echo "Imported GPG Key."
+    echo "Imported Personal GPG Key."
+
+    curl -sSL $PGP_KEY_URL_PC | gpg --import -
+    echo "Imported Polychain GPG Key."
   }
   ask "Would you like to import your public gpg key?" _do
 }
