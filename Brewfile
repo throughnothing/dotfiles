@@ -47,6 +47,7 @@ cask 'riot'
 cask 'osxfuse'
 cask 'the-unarchiver'
 cask 'caffeine'
+cask 'calibre'
 
 # Markdown Editor
 cask 'typora'
