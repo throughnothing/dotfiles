@@ -55,6 +55,11 @@ function setup_private_dotfiles {
       pushd $PRIVATE_INSTALLDIR >> /dev/null
       # Use install-symlinks from .dotfiles repo
       $INSTALLDIR/install-symlinks
+      
+      # Set correct perms on .ssh/ stuff
+      chmod 600 ~/.ssh/id_rsa
+      chmod 644 ~/.ssh/*.pub
+
       popd >> /dev/null
     }
     ask "Would you like to install your private-dotfiles symlinks?" _do
